@@ -16,9 +16,9 @@ export class ToolsComponent implements OnInit {
   ngOnInit(): void {
   }
 
-  ButtonClick(): void{
+  buttonClick(): void{
     /*alert("Button Click");*/
     this.title = "Something else";
-    this.textColor = "blue";
+    this.textColor = "jgjgj";
   }
 }

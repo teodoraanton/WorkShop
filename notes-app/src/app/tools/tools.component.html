@@ -1,8 +1,8 @@
 <p>Note content is: {{noteContent}}</p>
 <p [style.color] = "textColor">The title is {{title}}</p>
-<mat-from-field>
-    <input matInput placeholder="Add Note" [(ngModel)] = "noteContents">
-</mat-from-field>
-<button mat-icon-button (click)="buttonClicl()">
+<mat-form-field>
+    <input matInput placeholder="Add Note" [(ngModel)] = "noteContent">
+</mat-form-field>
+<button mat-icon-button (click)="buttonClick()">
     <mat-icon>add</mat-icon>
 </button>

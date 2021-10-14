@@ -11,12 +11,14 @@ import { ToolsComponent } from './tools/tools.component';
 import { MatButtonModule } from '@angular/material/button';
 import { MatIconModule } from '@angular/material/icon'
 import { FormsModule } from '@angular/forms';
+import { Test1Component } from './test/test1/test1.component';
+import { MatFormFieldModule } from '@angular/material/form-field';
 
 
 @NgModule({
   declarations: [
     AppComponent,
-    Curs3Component,
+    Test1Component,
     NoteComponent,
     ToolsComponent
   ],
@@ -25,11 +27,10 @@ import { FormsModule } from '@angular/forms';
     AppRoutingModule,
     BrowserAnimationsModule,
     TestModule,
-    NoteComponent,
-    ToolsComponent,
     FormsModule,
     MatButtonModule,
-    MatIconModule
+    MatIconModule,
+    MatFormFieldModule
   ],
   providers: [],
   bootstrap: [AppComponent]
