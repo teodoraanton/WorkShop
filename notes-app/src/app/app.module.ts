@@ -15,7 +15,9 @@ import { Test1Component } from './test/test1/test1.component';
 import { MatFormFieldModule } from '@angular/material/form-field';
 import { AddPipe } from './add.pipe';
 import { FilterComponent } from './filter/filter.component';
-import { MatCardModule } from '@angular/material/card'
+import { MatCardModule } from '@angular/material/card';
+import { AddNoteComponent } from './add-note/add-note.component';
+import { HomeComponent } from './home/home.component'
 
 
 @NgModule({
@@ -25,7 +27,9 @@ import { MatCardModule } from '@angular/material/card'
     NoteComponent,
     ToolsComponent,
     AddPipe,
-    FilterComponent
+    FilterComponent,
+    AddNoteComponent,
+    HomeComponent
   ],
   imports: [
     BrowserModule,
