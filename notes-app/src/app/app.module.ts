@@ -13,6 +13,9 @@ import { MatIconModule } from '@angular/material/icon'
 import { FormsModule } from '@angular/forms';
 import { Test1Component } from './test/test1/test1.component';
 import { MatFormFieldModule } from '@angular/material/form-field';
+import { AddPipe } from './add.pipe';
+import { FilterComponent } from './filter/filter.component';
+import { MatCardModule } from '@angular/material/card'
 
 
 @NgModule({
@@ -20,7 +23,9 @@ import { MatFormFieldModule } from '@angular/material/form-field';
     AppComponent,
     Test1Component,
     NoteComponent,
-    ToolsComponent
+    ToolsComponent,
+    AddPipe,
+    FilterComponent
   ],
   imports: [
     BrowserModule,
@@ -30,7 +35,8 @@ import { MatFormFieldModule } from '@angular/material/form-field';
     FormsModule,
     MatButtonModule,
     MatIconModule,
-    MatFormFieldModule
+    MatFormFieldModule,
+    MatCardModule
   ],
   providers: [],
   bootstrap: [AppComponent]

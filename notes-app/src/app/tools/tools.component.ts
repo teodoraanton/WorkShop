@@ -11,6 +11,8 @@ export class ToolsComponent implements OnInit {
   textColor: string = "red";
   noteContent: string = "";
 
+  currentDate = Date.now();
+
   constructor() { }
 
   ngOnInit(): void {
@@ -18,7 +20,7 @@ export class ToolsComponent implements OnInit {
 
   buttonClick(): void{
     /*alert("Button Click");*/
-    this.title = "Something else";
-    this.textColor = "jgjgj";
+    // this.title = "Title";
+    // this.textColor = "jgjgj";
   }
 }

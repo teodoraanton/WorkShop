@@ -1,8 +1,15 @@
-<p>Note content is: {{noteContent}}</p>
-<p [style.color] = "textColor">The title is {{title}}</p>
-<mat-form-field>
+<!-- <p>Note content is: {{noteContent}}</p>
+<p [style.color] = "textColor">The title is {{title | uppercase}}</p> -->
+
+<!-- <p>Date is: {{currentDate | date : 'shortDate'}}</p>
+<p>Number is: {{2 | add: 4}}</p> -->
+
+<!-- <mat-form-field>
     <input matInput placeholder="Add Note" [(ngModel)] = "noteContent">
-</mat-form-field>
-<button mat-icon-button (click)="buttonClick()">
-    <mat-icon>add</mat-icon>
-</button>
+</mat-form-field> -->
+
+<mat-card class = "add-note-card">
+    <button mat-icon-button (click)="buttonClick()">
+        <mat-icon>add</mat-icon>
+    </button>
+</mat-card>
