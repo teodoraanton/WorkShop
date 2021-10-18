@@ -9,12 +9,14 @@ import { MatIconModule } from '@angular/material/icon'
 import { MatFormFieldModule } from '@angular/material/form-field';
 import { FormsModule } from '@angular/forms';
 import { FilterComponent } from './filter/filter.component';
+import { EvenIndexPipe } from './even-index.pipe';
 
 @NgModule({
   declarations: [
     AppComponent,
     BackgroundComponent,
-    FilterComponent
+    FilterComponent,
+    EvenIndexPipe
   ],
   imports: [
     BrowserModule,

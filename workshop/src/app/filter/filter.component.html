@@ -3,6 +3,6 @@
     <p>{{str.name | uppercase}}</p>
 </div>
 <p>String with even index are:</p>
-<div class="even-index" *ngFor="let str of strings; let i=index; let even=even">
-    <p> {{str.name | uppercase}}</p>
+<div class="is-even-index" *ngFor="let str of strings; let i=index">
+    <p> "{{str.name | uppercase}}" has even index? -> {{ str.id | evenIndex}}</p>
 </div>
