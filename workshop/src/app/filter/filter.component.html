@@ -1,0 +1,8 @@
+<p>All string are:</p>
+<div class="all-strings" *ngFor="let str of strings">
+    <p>{{str.name | uppercase}}</p>
+</div>
+<p>String with even index are:</p>
+<div class="even-index" *ngFor="let str of strings; let i=index; let even=even">
+    <p> {{str.name | uppercase}}</p>
+</div>
