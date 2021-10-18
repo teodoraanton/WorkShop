@@ -1,6 +1,7 @@
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { DComponent } from './d/d.component';
+import { Module5Module } from './module5/module5.module';
 
 
 
@@ -9,7 +10,11 @@ import { DComponent } from './d/d.component';
     DComponent
   ],
   imports: [
-    CommonModule
+    CommonModule,
+    Module5Module
+  ],
+  exports: [
+    DComponent
   ]
 })
 export class Module4Module { }

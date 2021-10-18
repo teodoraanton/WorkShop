@@ -2,6 +2,7 @@ import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { FirstComponentComponent } from './first-component/first-component.component';
 import { SecondComponentComponent } from './second-component/second-component.component';
+import { Module1Module } from './module1/module1.module';
 
 
 
@@ -11,7 +12,8 @@ import { SecondComponentComponent } from './second-component/second-component.co
     SecondComponentComponent
   ],
   imports: [
-    CommonModule
+    CommonModule,
+    Module1Module
   ],
   exports: [
     FirstComponentComponent,
