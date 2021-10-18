@@ -1,0 +1,15 @@
+<div class= "filter-container">
+    <div class="filter-div" *ngFor="let note of notes">
+        <mat-card>
+            {{note.title}}
+            <button class="buttons-div" *ngFor="let button of buttons">
+                <button mat-icon-button>&</button>
+            </button>
+        </mat-card>
+    </div>
+    <mat-card class = "add-note-card">
+        <button mat-icon-button>
+            <mat-icon>+</mat-icon>
+        </button>
+    </mat-card>
+</div>

@@ -10,13 +10,18 @@ import { MatFormFieldModule } from '@angular/material/form-field';
 import { FormsModule } from '@angular/forms';
 import { FilterComponent } from './filter/filter.component';
 import { EvenIndexPipe } from './even-index.pipe';
+import { HomeComponent } from './home/home.component';
+import { AddNoteComponent } from './add-note/add-note.component';
+import { MatCardModule } from '@angular/material/card'
 
 @NgModule({
   declarations: [
     AppComponent,
     BackgroundComponent,
     FilterComponent,
-    EvenIndexPipe
+    EvenIndexPipe,
+    HomeComponent,
+    AddNoteComponent
   ],
   imports: [
     BrowserModule,
@@ -24,7 +29,8 @@ import { EvenIndexPipe } from './even-index.pipe';
     MatButtonModule,
     MatIconModule,
     MatFormFieldModule,
-    FormsModule
+    FormsModule,
+    MatCardModule
   ],
   providers: [],
   bootstrap: [AppComponent]

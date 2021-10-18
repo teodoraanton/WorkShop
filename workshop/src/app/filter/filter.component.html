@@ -6,3 +6,7 @@
 <div class="is-even-index" *ngFor="let str of strings; let i=index">
     <p> "{{str.name | uppercase}}" has even index? -> {{ str.id | evenIndex}}</p>
 </div>
+<br>
+<button mat-icon-button (click)="nextPage()">
+    <mat-icon>Note Page</mat-icon>    
+</button>

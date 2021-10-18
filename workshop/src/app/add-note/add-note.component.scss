@@ -1,0 +1,36 @@
+.filter-container {
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    .filter-div {
+        margin: 10px;
+        max-width: 200px;
+        min-height: 200px;
+        flex: 1;
+        display: flex;
+        justify-content: center;
+        align-items: flex-start;
+        font-weight: bold;
+        background-color: burlywood;
+        .buttons-div{
+            
+            flex:1;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            flex-direction: row;
+            color:red;
+        }
+        
+    }
+    
+    .add-note-card {
+            max-width: 150px;
+            min-height: 150px;
+            flex: 1;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            background-color: blue;
+        }
+}

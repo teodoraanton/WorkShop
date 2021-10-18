@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { Router } from '@angular/router';
 import { Strings } from '../models/strings';
 
 @Component({
@@ -30,9 +31,13 @@ export class FilterComponent implements OnInit {
     }
   ]
 
-  constructor() { }
+  constructor(private router: Router) { }
 
   ngOnInit(): void {
+  }
+
+  nextPage(): void{
+    this.router.navigateByUrl('/note');
   }
 
 }
