@@ -1,0 +1,28 @@
+<div class= "filter-container">
+    <div class="filter-div" *ngFor="let note of notes">
+        <mat-card>
+            <mat-card-title>
+                {{note.title}}
+            </mat-card-title>
+    
+            <mat-card-content>
+                {{note.description}}
+            </mat-card-content>
+
+            <mat-card-footer>
+                <div class="note-buttons" *ngFor="let button of buttons">
+                    <button mat-button>
+                        <mat-icon>mic</mat-icon>
+                    </button>
+                </div>
+            </mat-card-footer>
+        </mat-card> 
+    </div>
+    <div>
+        <mat-card class = "add-note">
+            <button mat-icon-button>
+                <mat-icon>+</mat-icon>
+            </button>
+        </mat-card>
+    </div> 
+</div>
