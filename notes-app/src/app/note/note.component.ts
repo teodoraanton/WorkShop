@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { NoteService } from '../services/note.service';
 import { Note } from './note';
 
 @Component({
@@ -7,23 +8,13 @@ import { Note } from './note';
   styleUrls: ['./note.component.scss']
 })
 export class NoteComponent implements OnInit {
-  notes: Note[] = [
-    {
-      id: "Id1",
-      title: "First note",
-      description: "This is the description for the first note"
-    },
-    {
-      id: "Id2",
-      title: "Second note",
-      description: "This is the description for the second note"
-    }
-  ];
+  notes: Note[];
 
-
-  constructor() { }
+  constructor(private noteService: NoteService) { }
 
   ngOnInit(): void {
+    this.noteService.serviceCall();
+    this.notes = this.noteService.getNotes();
   }
 
 }

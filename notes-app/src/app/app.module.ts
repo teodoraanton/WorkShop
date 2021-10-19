@@ -18,6 +18,7 @@ import { FilterComponent } from './filter/filter.component';
 import { MatCardModule } from '@angular/material/card';
 import { AddNoteComponent } from './add-note/add-note.component';
 import { HomeComponent } from './home/home.component'
+import { NoteService } from './services/note.service';
 
 
 @NgModule({
@@ -42,7 +43,9 @@ import { HomeComponent } from './home/home.component'
     MatFormFieldModule,
     MatCardModule
   ],
-  providers: [],
+  providers: [
+    NoteService
+  ],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

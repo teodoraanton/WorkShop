@@ -4,26 +4,15 @@
     justify-content: center;
     .filter-div {
         margin: 10px;
-        max-width: 200px;
-        min-height: 200px;
+        // max-width: 200px;
+        // min-height: 200px;
         flex: 1;
         display: flex;
         justify-content: center;
         align-items: flex-start;
         font-weight: bold;
         background-color: burlywood;
-        .buttons-div{
-            
-            flex:1;
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            flex-direction: row;
-            color:red;
-        }
-        
     }
-    
     .add-note-card {
             max-width: 150px;
             min-height: 150px;
@@ -33,4 +22,14 @@
             align-items: center;
             background-color: blue;
         }
+}
+.note-title{
+    display: flex;
+    justify-content: center;
+}
+.note-card{
+    
+}
+.note-buttons{
+    display: flex;
 }
