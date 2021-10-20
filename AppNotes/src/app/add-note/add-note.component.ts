@@ -18,4 +18,8 @@ export class AddNoteComponent implements OnInit {
     })
   }
 
+  addNewNote(title:string, description:string){
+    
+  }
+
 }

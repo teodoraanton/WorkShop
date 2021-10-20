@@ -5,15 +5,18 @@ import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { AddNoteComponent } from './add-note/add-note.component';
-import { FilterComponent } from './filter/filter.component';
+import { FilterComponent } from './filters/filter.component';
 import { HomeComponent } from './home/home.component';
-import { NoteComponent } from './note/note.component';
-import { ToolsComponent } from './tools/tools.component';
+import { NoteComponent } from './notes/note.component';
 import { FormsModule } from '@angular/forms';
 import { MatButtonModule } from '@angular/material/button';
 import { MatIconModule } from '@angular/material/icon'
 import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatCardModule } from '@angular/material/card';
+import { NoteService } from './services/note.service';
+import { ButtonService } from './services/button.service';
+import { MatOptionModule } from '@angular/material/core';
+import {MatSelectModule} from '@angular/material/select';
 
 
 @NgModule({
@@ -23,7 +26,6 @@ import { MatCardModule } from '@angular/material/card';
     FilterComponent,
     HomeComponent,
     NoteComponent,
-    ToolsComponent
   ],
   imports: [
     BrowserModule,
@@ -33,9 +35,14 @@ import { MatCardModule } from '@angular/material/card';
     MatButtonModule,
     MatIconModule,
     MatFormFieldModule,
-    MatCardModule
+    MatCardModule,
+    MatOptionModule,
+    MatSelectModule
   ],
-  providers: [],
+  providers: [
+    NoteService,
+    ButtonService
+  ],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

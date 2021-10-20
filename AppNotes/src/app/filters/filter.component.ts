@@ -9,16 +9,16 @@ import { Category } from '../models/category';
 export class FilterComponent implements OnInit {
   categories: Category[] = [
     {
-      id: '1',
-      name: 'To Do'
+      value: '1',
+      viewValue: 'To Do'
     },
     {
-      id: '2',
-      name: 'Done'
+      value: '2',
+      viewValue: 'Done'
     },
     {
-      id: '3',
-      name: 'Doing'
+      value: '3',
+      viewValue: 'Doing'
     }
   ];
   constructor() { }

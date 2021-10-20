@@ -1,0 +1,32 @@
+.filter-container {
+    display: flex;
+    flex-direction: row;
+    .filter-div {
+        .card-note{
+            margin: 20px;
+            max-width: 200px;
+            min-height: 200px;
+            font-weight: bold;
+            background-color: antiquewhite;
+        }
+    }
+    .note-buttons{
+        margin:13px;
+        max-width: 10px;
+        max-height: 10px;
+        flex: 1;
+        display: flex;
+        flex-direction: row;
+    }
+    .add-note-card {
+        margin:20px;
+        max-width: 200px;;
+        max-height: 200px;
+        flex: 1;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        font-weight: bold;
+        background-color: rgb(120, 120, 236);
+    }
+}

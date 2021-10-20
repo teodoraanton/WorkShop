@@ -1,28 +1,28 @@
 import { Injectable } from '@angular/core';
-import { Buttons } from '../models/buttons';
+import { Buttons } from '../models/button';
 
 @Injectable()
 export class ButtonService {
   buttons: Buttons[] = [
     {
       id: '1',
-      name: 'Next'
+      name: 'forward'
     },
     {
       id: '2',
-      name: 'Favorite'
+      name: 'grade'
     },
     {
       id: '3',
-      name: 'Done'
+      name: 'done_outline'
     },
     {
       id: '4',
-      name: 'Edit'
+      name: 'create'
     },
     {
       id: '5',
-      name: 'Delete'
+      name: 'delete'
     }
   ]
 
