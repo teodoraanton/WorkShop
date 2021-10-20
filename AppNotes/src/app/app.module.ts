@@ -8,16 +8,17 @@ import { AddNoteComponent } from './add-note/add-note.component';
 import { FilterComponent } from './filters/filter.component';
 import { HomeComponent } from './home/home.component';
 import { NoteComponent } from './notes/note.component';
-import { FormsModule } from '@angular/forms';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { MatButtonModule } from '@angular/material/button';
 import { MatIconModule } from '@angular/material/icon'
 import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatCardModule } from '@angular/material/card';
 import { NoteService } from './services/note.service';
 import { ButtonService } from './services/button.service';
-import { MatOptionModule } from '@angular/material/core';
-import {MatSelectModule} from '@angular/material/select';
+import { ErrorStateMatcher, MatOptionModule, ShowOnDirtyErrorStateMatcher } from '@angular/material/core';
+import { MatSelectModule } from '@angular/material/select';
 import { CategoryService } from './services/category.service';
+import { MatInputModule } from '@angular/material/input';
 
 
 @NgModule({
@@ -36,14 +37,17 @@ import { CategoryService } from './services/category.service';
     MatButtonModule,
     MatIconModule,
     MatFormFieldModule,
+    MatInputModule,
     MatCardModule,
     MatOptionModule,
-    MatSelectModule
+    MatSelectModule,
+    ReactiveFormsModule
   ],
   providers: [
     NoteService,
     ButtonService,
-    CategoryService
+    CategoryService,
+    {provide: ErrorStateMatcher, useClass: ShowOnDirtyErrorStateMatcher}
   ],
   bootstrap: [AppComponent]
 })

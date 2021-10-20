@@ -1,4 +1,5 @@
 .filter-container {
+    resize: both;
     display: flex;
     flex-direction: row;
     .filter-div {
@@ -29,4 +30,6 @@
         font-weight: bold;
         background-color: rgb(120, 120, 236);
     }
+
+    
 }

@@ -1,8 +1,9 @@
 import { Component, OnInit } from '@angular/core';
+import { FormBuilder, FormControl, FormGroup, FormGroupDirective, NgForm, Validators } from '@angular/forms';
+import { ErrorStateMatcher } from '@angular/material/core';
 import { ActivatedRoute } from '@angular/router';
 import { Category } from '../models/category';
 import { CategoryService } from '../services/category.service';
-
 @Component({
   selector: 'app-add-note',
   templateUrl: './add-note.component.html',
@@ -12,8 +13,21 @@ export class AddNoteComponent implements OnInit {
   title: string = "";
   description: string = "";
   category: Category[];
+  noteForm: FormGroup;
 
-  constructor(private _activatedRoute: ActivatedRoute, private categoryService: CategoryService) { }
+  public get titleControl(){
+    return this.noteForm.get('title');
+  }
+
+  public get descriptionControl(){
+    return this.noteForm.get('description');
+  }
+
+  public get categoryControl(){
+    return this.noteForm.get('category');
+  }
+
+  constructor(private _activatedRoute: ActivatedRoute, private categoryService: CategoryService, private formBuilder: FormBuilder) { }
 
   ngOnInit(): void {
       this._activatedRoute.queryParams.subscribe(params =>{
@@ -21,6 +35,11 @@ export class AddNoteComponent implements OnInit {
       this.description = params["description"];
     })
     this.category=this.categoryService.getCategories();
+    this.noteForm = this.formBuilder.group({
+      title: ["", Validators.required],
+      description: ["", Validators.required],
+      category: ["", Validators.required]
+    });
   }
 
   addNewNote(title:string, description:string){
