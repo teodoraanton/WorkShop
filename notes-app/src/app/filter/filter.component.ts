@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, EventEmitter, Output } from '@angular/core';
 import { Category } from '../models/category';
 
 @Component({
@@ -21,9 +21,15 @@ export class FilterComponent implements OnInit {
       name: 'Doing'
     }
   ];
+
+  @Output() emitSelectedFilter = new EventEmitter<string>();
   constructor() { }
 
   ngOnInit(): void {
+  }
+
+  selectFilter(categoryId: string) {
+    this.emitSelectedFilter.emit(categoryId);
   }
 
 }

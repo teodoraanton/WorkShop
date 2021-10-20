@@ -17,6 +17,7 @@ import { NoteService } from './services/note.service';
 import { ButtonService } from './services/button.service';
 import { MatOptionModule } from '@angular/material/core';
 import {MatSelectModule} from '@angular/material/select';
+import { CategoryService } from './services/category.service';
 
 
 @NgModule({
@@ -41,7 +42,8 @@ import {MatSelectModule} from '@angular/material/select';
   ],
   providers: [
     NoteService,
-    ButtonService
+    ButtonService,
+    CategoryService
   ],
   bootstrap: [AppComponent]
 })
