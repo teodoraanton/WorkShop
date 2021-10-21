@@ -19,6 +19,7 @@ import { ErrorStateMatcher, MatOptionModule, ShowOnDirtyErrorStateMatcher } from
 import { MatSelectModule } from '@angular/material/select';
 import { CategoryService } from './services/category.service';
 import { MatInputModule } from '@angular/material/input';
+import { SearchComponent } from './search/search.component';
 
 
 @NgModule({
@@ -28,6 +29,7 @@ import { MatInputModule } from '@angular/material/input';
     FilterComponent,
     HomeComponent,
     NoteComponent,
+    SearchComponent,
   ],
   imports: [
     BrowserModule,

@@ -8,6 +8,7 @@ import { Component, OnInit } from '@angular/core';
 export class HomeComponent implements OnInit {
 
   categoryValue: string;
+  wordSearch: string;
 
   constructor() { }
 
@@ -16,6 +17,12 @@ export class HomeComponent implements OnInit {
 
   receivedCategory(categoryId: string) {
     this.categoryValue = categoryId;
+    this.wordSearch = "";
+  }
+
+  receiveSearch(searchWord: string){
+    this.wordSearch = searchWord;
+    this.categoryValue = "";
   }
 
 }

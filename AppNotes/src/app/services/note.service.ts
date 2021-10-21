@@ -53,4 +53,9 @@ export class NoteService {
   getFiltredNotes(selectedCategory: string){
     this.notes.filter(note => note.categoryValue === selectedCategory);
   }
+
+  getSearchedNotes(searchWord: string){
+    return this.notes.filter(note => note.title.toLowerCase().includes(searchWord.toLowerCase()) ||
+                                      note.description.toLowerCase().includes(searchWord.toLowerCase()));
+  }
 }

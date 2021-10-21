@@ -11,10 +11,12 @@ import { NoteService } from '../services/note.service';
   styleUrls: ['./note.component.scss']
 })
 export class NoteComponent implements OnInit, OnChanges {
-  notes: Note[];
+  notes: Note[] = [];
   buttons: Buttons[];
 
   @Input() selectedCategory: string;
+
+  @Input() selectedInputSearch: string;
 
   constructor(private router: Router, private noteService: NoteService, private buttonService: ButtonService) { }
 
@@ -24,6 +26,9 @@ export class NoteComponent implements OnInit, OnChanges {
   }
 
   ngOnChanges(): void {
+    if(this.selectedInputSearch){
+      this.notes = this.noteService.getSearchedNotes(this.selectedInputSearch);
+    }
     if(this.selectedCategory){
       this.notes = this.noteService.getFiltredNotes(this.selectedCategory);
     }
