@@ -31,5 +31,6 @@ export class FilterComponent implements OnInit {
   selectFilter(categoryId: string) {
     this.emitSelectedFilter.emit(categoryId);
   }
+  
 
 }

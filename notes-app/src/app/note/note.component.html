@@ -1,5 +1,5 @@
 <div *ngFor="let note of notes">
-    <mat-card>
+    <mat-card (click)="showNote(note)">
         <mat-card-header>
             {{note.title}}
         </mat-card-header>

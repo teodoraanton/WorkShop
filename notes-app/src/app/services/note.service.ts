@@ -14,13 +14,13 @@ export class NoteService {
       id: "Id2",
       title: "Second note",
       description: "This is the description for the second note",
-      categoryId: "1"
+      categoryId: "2"
     },
     {
       id: "Id3",
       title: "Third note",
       description: "This is the description for the third note",
-      categoryId: "1"
+      categoryId: "3"
     }
   ];
 

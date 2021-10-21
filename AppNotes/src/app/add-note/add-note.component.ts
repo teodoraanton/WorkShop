@@ -4,6 +4,7 @@ import { ErrorStateMatcher } from '@angular/material/core';
 import { ActivatedRoute } from '@angular/router';
 import { Category } from '../models/category';
 import { CategoryService } from '../services/category.service';
+import { NoteService } from '../services/note.service';
 @Component({
   selector: 'app-add-note',
   templateUrl: './add-note.component.html',
@@ -12,7 +13,10 @@ import { CategoryService } from '../services/category.service';
 export class AddNoteComponent implements OnInit {
   title: string = "";
   description: string = "";
+  selectCategory: string;
+
   category: Category[];
+  
   noteForm: FormGroup;
 
   public get titleControl(){
@@ -27,7 +31,7 @@ export class AddNoteComponent implements OnInit {
     return this.noteForm.get('category');
   }
 
-  constructor(private _activatedRoute: ActivatedRoute, private categoryService: CategoryService, private formBuilder: FormBuilder) { }
+  constructor(private _activatedRoute: ActivatedRoute, private categoryService: CategoryService, private formBuilder: FormBuilder, private noteService: NoteService) { }
 
   ngOnInit(): void {
       this._activatedRoute.queryParams.subscribe(params =>{
@@ -42,8 +46,8 @@ export class AddNoteComponent implements OnInit {
     });
   }
 
-  addNewNote(title:string, description:string){
-    
+  addNewNote(){
+    this.noteService.addNote(this.title, this.description, this.selectCategory)
   }
 
 }
