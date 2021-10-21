@@ -1,14 +1,22 @@
 <h1>Add a note</h1>
 <form>
     <mat-form-field>
-        <label>Note</label>
+        <mat-label>Note</mat-label>
         <input matInput name="inputNote" placeholder="Enter note"/>
     </mat-form-field><br>
 
     <mat-form-field>
-        <label>Description</label>
+        <mat-label>Description</mat-label>
         <textarea matInput  name="inputNote" placeholder="Enter description"></textarea>
     </mat-form-field><br>
+
+    <mat-form-field >
+        <mat-label>Choose a category </mat-label>
+        <mat-select *ngIf="categories" [(ngModel)]="idCategoryNote">
+            <mat-option *ngFor="let categ of categories" [value]="categ.id">{{categ.name}}</mat-option>
+        </mat-select>
+    </mat-form-field> 
+    
 
     <button mat-button color="primary">Add</button>
 </form>

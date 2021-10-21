@@ -18,6 +18,10 @@ import { MatCardModule } from '@angular/material/card';
 import { AddNoteComponent } from './add-note/add-note.component';
 import { HomeComponent } from './home/home.component'
 import { NoteService } from './services/note.service';
+import { HttpClientModule, HTTP_INTERCEPTORS } from '@angular/common/http';
+import { HttpMockApiInterceptor } from './services/http-mock-api.interceptor';
+import { CommonModule } from '@angular/common';
+import { MatSelectModule } from '@angular/material/select';
 
 
 @NgModule({
@@ -33,6 +37,7 @@ import { NoteService } from './services/note.service';
   ],
   imports: [
     BrowserModule,
+    CommonModule,
     AppRoutingModule,
     BrowserAnimationsModule,
     TestModule,
@@ -40,10 +45,18 @@ import { NoteService } from './services/note.service';
     MatButtonModule,
     MatIconModule,
     MatFormFieldModule,
-    MatCardModule
+    MatCardModule,
+    HttpClientModule,
+    MatSelectModule
   ],
   providers: [
-    NoteService
+    NoteService,
+    {
+      provide: HTTP_INTERCEPTORS,
+      useClass: HttpMockApiInterceptor,
+      multi: true
+    }
+
   ],
   bootstrap: [AppComponent]
 })
