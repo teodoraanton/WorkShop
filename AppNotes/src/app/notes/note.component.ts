@@ -29,12 +29,12 @@ export class NoteComponent implements OnInit, OnChanges {
     if(this.selectedInputSearch){
       this.notes = this.noteService.getSearchedNotes(this.selectedInputSearch);
     }
-    if(this.selectedCategory){
-      this.notes = this.noteService.getFiltredNotes(this.selectedCategory);
-    }
+    // if(this.selectedCategory){
+    //   this.notes = this.noteService.getFiltredNotes(this.selectedCategory);
+    // }
   }
 
-  addNote(): void{
+  addNotePage(): void{
     this.router.navigateByUrl('/addnote');
   }
 

@@ -46,8 +46,8 @@ export class AddNoteComponent implements OnInit {
     });
   }
 
-  addNewNote(){
-    this.noteService.addNote(this.title, this.description, this.selectCategory)
+  addNewNote(title: string, description: string, selectCategory: string){
+    this.noteService.addNote(this.title, this.description, this.selectCategory);
   }
 
 }

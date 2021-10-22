@@ -28,5 +28,5 @@
         </mat-error>
       </mat-form-field>
 
-    <button mat-raised-button color="primary" [disabled]="noteForm.invalid" (click)="addNewNote(title, description)">ADD</button>
+    <button mat-raised-button color="primary" (click)="addNewNote(title, description, selectCategory)" >ADD</button>
 </form>

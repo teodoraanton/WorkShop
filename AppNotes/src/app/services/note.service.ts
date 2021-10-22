@@ -55,7 +55,6 @@ export class NoteService {
   }
 
   getSearchedNotes(searchWord: string){
-    return this.notes.filter(note => note.title.toLowerCase().includes(searchWord.toLowerCase()) ||
-                                      note.description.toLowerCase().includes(searchWord.toLowerCase()));
+    return this.notes.filter(note => note.title.toLowerCase().includes(searchWord.toLowerCase()) || note.description.toLowerCase().includes(searchWord.toLowerCase()));
   }
 }
