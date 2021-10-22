@@ -1,6 +1,8 @@
 import { Component, EventEmitter, OnInit, Output } from '@angular/core';
 import { Category } from '../models/category';
+import { Note } from '../models/note';
 import { CategoryService } from '../services/category.service';
+import { NoteService } from '../services/note.service';
 
 @Component({
   selector: 'app-filter',
@@ -12,7 +14,7 @@ export class FilterComponent implements OnInit {
 
   @Output() emitSelectedFilter = new EventEmitter<string>();
 
-  constructor(private categoryService: CategoryService) { }
+  constructor(private categoryService: CategoryService, private noteService: NoteService) { }
 
   ngOnInit(): void {
     this.categories=this.categoryService.getCategories()
@@ -20,5 +22,8 @@ export class FilterComponent implements OnInit {
 
   selectCategory(categoryValue: string): void{
     this.emitSelectedFilter.emit(categoryValue);
+  }
+  clearAllFiltres(){
+    this.noteService.getNotes();
   }
 }

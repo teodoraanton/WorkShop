@@ -4,18 +4,18 @@
             <mat-card-title>
                 {{note.title}}
             </mat-card-title>
+            
     
             <mat-card-content>
                 {{note.description}}
             </mat-card-content>
+            <br><br><br>
 
             <mat-card-actions>
                 <div>
                     <button mat-icon-button><mat-icon>arrow_right_alt</mat-icon></button>
                     <button mat-icon-button><mat-icon>star_half</mat-icon></button>
                     <button mat-icon-button><mat-icon>done_outline</mat-icon></button>
-                </div>
-                <div>
                     <button mat-icon-button><mat-icon>edit</mat-icon></button>
                     <button mat-icon-button (click)="deleteNote(note.id)"><mat-icon>delete</mat-icon></button>
                 </div>
