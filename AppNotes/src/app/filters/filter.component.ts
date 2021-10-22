@@ -18,7 +18,7 @@ export class FilterComponent implements OnInit {
     this.categories=this.categoryService.getCategories()
   }
 
-  selectFilter(categoryValue: string){
+  selectCategory(categoryValue: string): void{
     this.emitSelectedFilter.emit(categoryValue);
   }
 }

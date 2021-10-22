@@ -1,60 +1,61 @@
+import { HttpClient, HttpClientModule, HttpHeaders } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Router } from '@angular/router';
+import { Observable } from 'rxjs/internal/Observable';
 import { Note } from '../models/note';
+import { map } from 'rxjs/operators';
 
 @Injectable()
 export class NoteService {
-  id: string = "4";
+  readonly baseUrl = 'https://localhost:4200';
+  readonly httpOptions = {
+    headers: new HttpHeaders({
+      'Content-Type': 'application/json',
+    }),
+  };
 
-  notes: Note[] = [
-    {
-      id: "1",
-      title: "First note",
-      description: "This is the description for the first note",
-      categoryValue: "1"
-    },
-    {
-      id: "2",
-      title: "Second note",
-      description: "This is the description for the second note",
-      categoryValue: "2"
-    },
-    {
-      id: "3",
-      title: "Third note",
-      description: "This is the description for the third note",
-      categoryValue: "2"
-    }
-  ];
-
-  constructor(private router: Router) { }
+  constructor(private router: Router, private httpClient: HttpClient) { }
 
   serviceCall() {
     console.log("Note service was called");
   }
 
-  getNotes(): Note[]{
-    return this.notes;
+  getNotes(): Observable<Note[]> {
+    return this.httpClient.get<Note[]>(
+      this.baseUrl + '/notes',
+      this.httpOptions
+    );
   }
 
-  addNote(title: string, description: string, selectedCategory: string) {
-    let newNote = {
-      id: this.id,
-      title: title,
-      description: description,
-      categoryValue: selectedCategory
-    };
-    this.notes.push(newNote);
-    this.id = (parseInt(this.id)+1).toString();
-    this.router.navigateByUrl('');
-    console.log(this.notes);
+  addNote(noteTitle:string, noteDescription:string, noteCategoryId:string) {
+    const note: Note ={
+      title: noteTitle,
+      description: noteDescription,
+      categoryValue: noteCategoryId
+    }
+    return this.httpClient.post(this.baseUrl+"/note", note).subscribe();
   }
   
   getFiltredNotes(selectedCategory: string){
-    this.notes.filter(note => note.categoryValue === selectedCategory);
+    return this.httpClient
+      .get<Note[]>(this.baseUrl + '/notes', this.httpOptions)
+      .pipe(
+        map((notes) => notes.filter((note) => note.categoryValue === selectedCategory))
+      );
+    //this.notes.filter(note => note.categoryValue === selectedCategory);
   }
 
   getSearchedNotes(searchWord: string){
-    return this.notes.filter(note => note.title.toLowerCase().includes(searchWord.toLowerCase()) || note.description.toLowerCase().includes(searchWord.toLowerCase()));
+    return this.httpClient
+      .get<Note[]>(this.baseUrl + '/notes', this.httpOptions)
+      .pipe(
+        map((notes) => notes.filter((note) => note.title.toLowerCase().includes(searchWord.toLowerCase()) || note.description.toLowerCase().includes(searchWord.toLowerCase())))
+      );
+
+    //return this.notes.filter(note => note.title.toLowerCase().includes(searchWord.toLowerCase()) || note.description.toLowerCase().includes(searchWord.toLowerCase()));
+  }
+
+  deleteNote(id: string) {
+    return this.httpClient.delete(this.baseUrl+'/note/'+id).subscribe();
   }
 }

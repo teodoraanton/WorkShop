@@ -14,12 +14,14 @@ import { MatIconModule } from '@angular/material/icon'
 import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatCardModule } from '@angular/material/card';
 import { NoteService } from './services/note.service';
-import { ButtonService } from './services/button.service';
-import { ErrorStateMatcher, MatOptionModule, ShowOnDirtyErrorStateMatcher } from '@angular/material/core';
+import { MatOptionModule } from '@angular/material/core';
 import { MatSelectModule } from '@angular/material/select';
 import { CategoryService } from './services/category.service';
 import { MatInputModule } from '@angular/material/input';
 import { SearchComponent } from './search/search.component';
+import { CommonModule } from '@angular/common';
+import { HttpClientModule, HTTP_INTERCEPTORS } from '@angular/common/http';
+import { HttpMockApiInterceptor } from './services/http-mock-api.interceptor';
 
 
 @NgModule({
@@ -43,13 +45,19 @@ import { SearchComponent } from './search/search.component';
     MatCardModule,
     MatOptionModule,
     MatSelectModule,
-    ReactiveFormsModule
+    ReactiveFormsModule,
+    CommonModule,
+    HttpClientModule
   ],
   providers: [
     NoteService,
-    ButtonService,
     CategoryService,
-    {provide: ErrorStateMatcher, useClass: ShowOnDirtyErrorStateMatcher}
+    {
+      provide: HTTP_INTERCEPTORS,
+      useClass: HttpMockApiInterceptor,
+      multi: true
+    }
+
   ],
   bootstrap: [AppComponent]
 })

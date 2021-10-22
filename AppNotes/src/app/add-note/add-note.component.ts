@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormControl, FormGroup, FormGroupDirective, NgForm, Validators } from '@angular/forms';
 import { ErrorStateMatcher } from '@angular/material/core';
-import { ActivatedRoute } from '@angular/router';
+import { ActivatedRoute, Router } from '@angular/router';
 import { Category } from '../models/category';
 import { CategoryService } from '../services/category.service';
 import { NoteService } from '../services/note.service';
@@ -31,7 +31,7 @@ export class AddNoteComponent implements OnInit {
     return this.noteForm.get('category');
   }
 
-  constructor(private _activatedRoute: ActivatedRoute, private categoryService: CategoryService, private formBuilder: FormBuilder, private noteService: NoteService) { }
+  constructor(private router: Router,private _activatedRoute: ActivatedRoute, private categoryService: CategoryService, private formBuilder: FormBuilder, private noteService: NoteService) { }
 
   ngOnInit(): void {
       this._activatedRoute.queryParams.subscribe(params =>{
@@ -46,8 +46,9 @@ export class AddNoteComponent implements OnInit {
     });
   }
 
-  addNewNote(title: string, description: string, selectCategory: string){
-    this.noteService.addNote(this.title, this.description, this.selectCategory);
+  add(){
+    this.noteService.addNote(this.title,this.description,this.selectCategory)
+     this.router.navigateByUrl('');
   }
 
 }

@@ -9,13 +9,17 @@
                 {{note.description}}
             </mat-card-content>
 
-            <mat-card-footer>
-                <div class="note-buttons" *ngFor="let button of buttons">
-                    <button mat-button>
-                        <mat-icon>{{button.name}}</mat-icon>
-                    </button>
+            <mat-card-actions>
+                <div>
+                    <button mat-icon-button><mat-icon>arrow_right_alt</mat-icon></button>
+                    <button mat-icon-button><mat-icon>star_half</mat-icon></button>
+                    <button mat-icon-button><mat-icon>done_outline</mat-icon></button>
                 </div>
-            </mat-card-footer>
+                <div>
+                    <button mat-icon-button><mat-icon>edit</mat-icon></button>
+                    <button mat-icon-button (click)="deleteNote(note.id)"><mat-icon>delete</mat-icon></button>
+                </div>
+            </mat-card-actions>
         </mat-card> 
     </div>
 </div>
