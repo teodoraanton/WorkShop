@@ -36,11 +36,11 @@ export class NoteService {
     return this.httpClient.post(this.baseUrl+"/note", note).subscribe();
   }
 
-  editNote(noteTitle:string, noteDescription:string, noteCategoryId:string){
+  editNote(notes: Note){
     const note: Note ={
-      title: noteTitle,
-      description: noteDescription,
-      categoryValue: noteCategoryId
+      title: notes.title,
+      description: notes.description,
+      categoryValue: notes.categoryValue
     }
     return this.httpClient.put(this.baseUrl+"/note", note).subscribe();
   }
