@@ -23,7 +23,5 @@ export class FilterComponent implements OnInit {
   selectCategory(categoryValue: string): void{
     this.emitSelectedFilter.emit(categoryValue);
   }
-  clearAllFiltres(){
-    this.noteService.getNotes();
-  }
+
 }

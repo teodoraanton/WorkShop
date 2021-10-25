@@ -1,4 +1,4 @@
-import { Component, Input, OnChanges, OnInit } from '@angular/core';
+import { Component, EventEmitter, Input, OnChanges, OnInit, Output } from '@angular/core';
 import { Router } from '@angular/router';
 import { Note } from '../models/note';
 import { NoteService } from '../services/note.service';
@@ -6,52 +6,70 @@ import { NoteService } from '../services/note.service';
 @Component({
   selector: 'app-note',
   templateUrl: './note.component.html',
-  styleUrls: ['./note.component.scss']
+  styleUrls: ['./note.component.scss'],
 })
 export class NoteComponent implements OnInit, OnChanges {
   notes: Note[] = [];
 
   @Input() selectedCategory: string;
+  @Input() searchWord: string;
 
-  @Input() selectedInputSearch: string;
+  //@Output() emitSearchWord = new EventEmitter<string>();
 
-  constructor(private router: Router, private noteService: NoteService) { }
+  constructor(private router: Router, private noteService: NoteService) {}
 
-  ngOnInit(): void { 
-    // this.notes = this.noteService.getNotes();
-    // this.buttons = this.buttonService.getButtons();
+  ngOnInit(): void {
     this.noteService.getNotes().subscribe((result) => {
       this.notes = result;
-    })
+    });
   }
 
   ngOnChanges(): void {
-    if(this.selectedCategory){
-      this.noteService.getFiltredNotes(this.selectedCategory).subscribe((result) => {
-        this.notes = result;
-      });
-      if(this.selectedInputSearch){
-        this.noteService.getSearchedNotes(this.selectedInputSearch).subscribe((result) =>{
+    this.filterNotes();
+  }
+
+  filterNotes() {
+    if (this.searchWord && this.selectedCategory) {
+      this.noteService
+        .getFilteredAndSearchedNotes(this.selectedCategory, this.searchWord)
+        .subscribe((result) => {
           this.notes = result;
         });
-      }
-      //this.notes = this.noteService.getFiltredNotes(this.selectedCategory);
+    } else if (this.searchWord) {
+      this.noteService.getSearchedNotes(this.searchWord).subscribe((result) => {
+        this.notes = result;
+      });
+    } else if (this.selectedCategory) {
+      this.noteService
+        .getFiltredNotes(this.selectedCategory)
+        .subscribe((result) => {
+          this.notes = result;
+        });
+    } else {
+      return;
     }
   }
 
-  addNotePage(): void{
-    this.router.navigateByUrl('/addnote');
+  clearAllFilters(){
+    this.noteService.getNotes().subscribe((result) => {
+      this.notes = result;
+    });
   }
 
-  deleteNote(id: string){
+  addNotePage(): void {
+    this.router.navigate(['/note-details'], { queryParams: { noteId: '' } });
+  }
+
+  deleteNote(id: string) {
     this.noteService.deleteNote(id);
-    this.noteService.getNotes().subscribe((result)=>{
-    this.notes = result;
-  })
+    this.noteService.getNotes().subscribe((result) => {
+      this.notes = result;
+    });
   }
 
-  editNote(note){
-    this.router.navigateByUrl('/editnote');
+  editNote(note) {
+    this.router.navigate(['/note-details'], {
+      queryParams: { noteId: note.id },
+    });
   }
-
 }

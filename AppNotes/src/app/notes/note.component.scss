@@ -14,7 +14,7 @@
     }
 }
 
-.add-note-card {
+.note-details-card {
     margin:20px;
     width: 200px;;
     height: 200px;
@@ -24,4 +24,16 @@
     align-items: center;
     font-weight: bold;
     background-color: rgb(120, 120, 236);
+}
+
+.search-filter{
+    flex: 1;
+    display: flex;
+    justify-content: center;
+}
+
+.no-filter{
+    flex: 1;
+    display: flex;
+    justify-content: center;
 }

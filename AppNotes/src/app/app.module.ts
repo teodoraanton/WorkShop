@@ -4,7 +4,7 @@ import { BrowserModule } from '@angular/platform-browser';
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
-import { AddNoteComponent } from './add-note/add-note.component';
+import { NoteDetailsComponent } from './note-details/note-details.component';
 import { FilterComponent } from './filters/filter.component';
 import { HomeComponent } from './home/home.component';
 import { NoteComponent } from './notes/note.component';
@@ -18,22 +18,18 @@ import { MatOptionModule } from '@angular/material/core';
 import { MatSelectModule } from '@angular/material/select';
 import { CategoryService } from './services/category.service';
 import { MatInputModule } from '@angular/material/input';
-import { SearchComponent } from './search/search.component';
 import { CommonModule } from '@angular/common';
 import { HttpClientModule, HTTP_INTERCEPTORS } from '@angular/common/http';
 import { HttpMockApiInterceptor } from './services/http-mock-api.interceptor';
-import { EditNoteComponent } from './edit-note/edit-note.component';
 
 
 @NgModule({
   declarations: [
     AppComponent,
-    AddNoteComponent,
+    NoteDetailsComponent,
     FilterComponent,
     HomeComponent,
-    NoteComponent,
-    SearchComponent,
-    EditNoteComponent
+    NoteComponent
   ],
   imports: [
     BrowserModule,

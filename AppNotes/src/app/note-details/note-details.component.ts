@@ -2,18 +2,21 @@ import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormControl, FormGroup, FormGroupDirective, NgForm, Validators } from '@angular/forms';
 import { ErrorStateMatcher } from '@angular/material/core';
 import { ActivatedRoute, Router } from '@angular/router';
+import { filter } from 'rxjs/operators';
 import { Category } from '../models/category';
 import { CategoryService } from '../services/category.service';
 import { NoteService } from '../services/note.service';
 @Component({
-  selector: 'app-add-note',
-  templateUrl: './add-note.component.html',
-  styleUrls: ['./add-note.component.scss']
+  selector: 'app-note-details',
+  templateUrl: './note-details.component.html',
+  styleUrls: ['./note-details.component.scss']
 })
-export class AddNoteComponent implements OnInit {
+export class NoteDetailsComponent implements OnInit {
   title: string = "";
   description: string = "";
   selectCategory: string;
+  noteId: string;
+  isEdit: boolean;
 
   category: Category[];
   
@@ -35,9 +38,19 @@ export class AddNoteComponent implements OnInit {
 
   ngOnInit(): void {
       this._activatedRoute.queryParams.subscribe(params =>{
-      this.title = params["title"];
-      this.description = params["description"];
+        this.noteId = params['noteId'];
+        if(this.noteId){
+          this.isEdit = true;
+        }else{
+          this.isEdit = false;
+        }
     })
+    // if(this.isEdit){
+    //   this.noteService.getNotes()
+    //   .pipe(
+    //     map((notes)=>notes.f)
+    //   )
+    // }
     this.category=this.categoryService.getCategories();
     this.noteForm = this.formBuilder.group({
       title: ["", Validators.required],

@@ -1,30 +1,47 @@
-<div class= "filter-container">
-    <div class="filter-div" *ngFor="let note of notes">
-        <mat-card class="card-note">
-            <mat-card-title>
-                {{note.title}}
-            </mat-card-title>
-            
-    
-            <mat-card-content>
-                {{note.description}}
-            </mat-card-content>
-            <br><br><br>
-
-            <mat-card-actions>
-                <div>
-                    <button mat-icon-button><mat-icon>arrow_right_alt</mat-icon></button>
-                    <button mat-icon-button><mat-icon>star_half</mat-icon></button>
-                    <button mat-icon-button><mat-icon>done_outline</mat-icon></button>
-                    <button mat-icon-button (click)="editNote(note)"><mat-icon>edit</mat-icon></button>
-                    <button mat-icon-button (click)="deleteNote(note.id)"><mat-icon>delete</mat-icon></button>
-                </div>
-            </mat-card-actions>
-        </mat-card> 
-    </div>
+<div class="search-filter">
+  <mat-form-field>
+    <input
+      matInput
+      placeholder="Search for a note..."
+      [(ngModel)]="searchWord"
+      (input)="filterNotes()"
+    />
+  </mat-form-field>
 </div>
-<mat-card class = "add-note-card">
-    <button mat-icon-button (click)="addNotePage()">
-        <mat-icon>+</mat-icon>
-    </button>
+<div class="no-filter">
+  <button mat-raised-button color= 'warn' (click)="clearAllFilters()">NO FILTER</button>
+</div>
+
+<div class="filter-container">
+  <div class="filter-div" *ngFor="let note of notes">
+    <mat-card class="card-note">
+      <mat-card-title>
+        {{ note.title }}
+      </mat-card-title>
+
+      <mat-card-content>
+        {{ note.description }}
+      </mat-card-content>
+      <br /><br /><br />
+
+      <mat-card-actions>
+        <div>
+          <button mat-icon-button><mat-icon>arrow_right_alt</mat-icon></button>
+          <button mat-icon-button><mat-icon>star_half</mat-icon></button>
+          <button mat-icon-button><mat-icon>done_outline</mat-icon></button>
+          <button mat-icon-button (click)="editNote(note)">
+            <mat-icon>edit</mat-icon>
+          </button>
+          <button mat-icon-button (click)="deleteNote(note.id)">
+            <mat-icon>delete</mat-icon>
+          </button>
+        </div>
+      </mat-card-actions>
+    </mat-card>
+  </div>
+</div>
+<mat-card class="note-details-card">
+  <button mat-icon-button (click)="addNotePage()">
+    <mat-icon>+</mat-icon>
+  </button>
 </mat-card>

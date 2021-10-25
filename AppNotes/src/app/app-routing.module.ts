@@ -1,13 +1,11 @@
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
-import { AddNoteComponent } from './add-note/add-note.component';
-import { EditNoteComponent } from './edit-note/edit-note.component';
+import { NoteDetailsComponent } from './note-details/note-details.component';
 import { HomeComponent } from './home/home.component';
 
 const appRoutes: Routes = [
   { path: "", component: HomeComponent, pathMatch:'full' },
-  { path: 'addnote', component: AddNoteComponent },
-  { path: 'editnote', component: EditNoteComponent },
+  { path: 'note-details', component: NoteDetailsComponent },
   { path: '**', redirectTo: ''}
 ];
 
