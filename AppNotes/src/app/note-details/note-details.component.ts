@@ -2,7 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormControl, FormGroup, FormGroupDirective, NgForm, Validators } from '@angular/forms';
 import { ErrorStateMatcher } from '@angular/material/core';
 import { ActivatedRoute, Router } from '@angular/router';
-import { filter } from 'rxjs/operators';
+import { filter, map } from 'rxjs/operators';
 import { Category } from '../models/category';
 import { CategoryService } from '../services/category.service';
 import { NoteService } from '../services/note.service';
@@ -45,12 +45,12 @@ export class NoteDetailsComponent implements OnInit {
           this.isEdit = false;
         }
     })
-    // if(this.isEdit){
-    //   this.noteService.getNotes()
-    //   .pipe(
-    //     map((notes)=>notes.f)
-    //   )
-    // }
+    if(this.isEdit){
+      this.noteService.getNotes()
+      .pipe(
+        map((notes)=>notes.filter((note) => note.id === this.noteId))
+      )
+    }
     this.category=this.categoryService.getCategories();
     this.noteForm = this.formBuilder.group({
       title: ["", Validators.required],

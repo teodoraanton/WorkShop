@@ -42,7 +42,7 @@ export class NoteService {
       description: noteDescription,
       categoryValue: noteCategoryId
     }
-    return this.httpClient.post(this.baseUrl+"/note", note).subscribe();
+    return this.httpClient.put(this.baseUrl+"/note", note).subscribe();
   }
   
   getFiltredNotes(selectedCategory: string){
