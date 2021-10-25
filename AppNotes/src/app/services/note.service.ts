@@ -35,6 +35,15 @@ export class NoteService {
     }
     return this.httpClient.post(this.baseUrl+"/note", note).subscribe();
   }
+
+  editNote(noteTitle:string, noteDescription:string, noteCategoryId:string){
+    const note: Note ={
+      title: noteTitle,
+      description: noteDescription,
+      categoryValue: noteCategoryId
+    }
+    return this.httpClient.post(this.baseUrl+"/note", note).subscribe();
+  }
   
   getFiltredNotes(selectedCategory: string){
     return this.httpClient

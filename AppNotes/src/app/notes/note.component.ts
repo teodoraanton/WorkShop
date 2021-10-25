@@ -50,4 +50,8 @@ export class NoteComponent implements OnInit, OnChanges {
   })
   }
 
+  editNote(note){
+    this.router.navigateByUrl('/editnote');
+  }
+
 }

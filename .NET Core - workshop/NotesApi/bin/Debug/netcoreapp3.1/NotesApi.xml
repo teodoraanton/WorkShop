@@ -1,0 +1,20 @@
+<?xml version="1.0"?>
+<doc>
+    <assembly>
+        <name>NotesApi</name>
+    </assembly>
+    <members>
+        <member name="M:NotesApi.Controllers.NotesController.Get">
+            <summary>
+                Returns a list of notes
+            </summary>
+            <returns></returns>
+        </member>
+        <member name="M:NotesApi.Controllers.WeatherForecastController.Get">
+            <summary>
+                Return the weather
+            </summary>
+            <returns></returns>
+        </member>
+    </members>
+</doc>
