@@ -4,9 +4,40 @@
         <name>NotesApi</name>
     </assembly>
     <members>
-        <member name="M:NotesApi.Controllers.NotesController.Get">
+        <member name="M:NotesApi.Controllers.CategoryController.Get">
+            <summary>
+                Returns a list of categories
+            </summary>
+            <returns></returns>
+        </member>
+        <member name="M:NotesApi.Controllers.CategoryController.GetWithParameters(System.String)">
+            <summary>
+                Return one category with the specified id
+            </summary>
+            <param name="id"></param>
+            <returns></returns>
+        </member>
+        <member name="M:NotesApi.Controllers.CategoryController.Post(NotesApi.Category)">
+            <summary>
+                Add a new category in list
+            </summary>
+            <param name="cat"></param>
+        </member>
+        <member name="M:NotesApi.Controllers.CategoryController.Delete(System.String)">
+            <summary>
+                Delete the category with the specified id
+            </summary>
+            <param name="id"></param>
+        </member>
+        <member name="M:NotesApi.Controllers.NotesController.GetWithParameters(System.String)">
             <summary>
                 Returns a list of notes
+            </summary>
+            <returns></returns>
+        </member>
+        <member name="M:NotesApi.Controllers.NotesController.Get">
+            <summary>
+            
             </summary>
             <returns></returns>
         </member>

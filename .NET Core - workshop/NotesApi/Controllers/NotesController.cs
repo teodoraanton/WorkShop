@@ -19,10 +19,20 @@ namespace NotesApi.Controllers
         ///     Returns a list of notes
         /// </summary>
         /// <returns></returns>
-        [HttpGet]
+        [HttpGet("{id}")]
+        public IActionResult GetWithParameters(string id)
+        {
+            return Ok(id);
+        }
+
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <returns></returns>
+        [HttpGet("")]
         public IActionResult Get()
         {
-            return Ok("Note controller works");
+            return Ok("FROM GET");
         }
     }
 }
