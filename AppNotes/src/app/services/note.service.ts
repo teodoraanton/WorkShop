@@ -51,7 +51,6 @@ export class NoteService {
       .pipe(
         map((notes) => notes.filter((note) => note.categoryValue === selectedCategory))
       );
-    //this.notes.filter(note => note.categoryValue === selectedCategory);
   }
 
   getSearchedNotes(searchWord: string){
@@ -61,15 +60,13 @@ export class NoteService {
         map((notes) => notes.filter((note) =>
          note.title.toLowerCase().includes(searchWord.toLowerCase()) || note.description.toLowerCase().includes(searchWord.toLowerCase())))
       );
-
-    //return this.notes.filter(note => note.title.toLowerCase().includes(searchWord.toLowerCase()) || note.description.toLowerCase().includes(searchWord.toLowerCase()));
   }
 
   getFilteredAndSearchedNotes(selectedCategory: string, searchWord: string){
     return this.httpClient.get<Note[]>(this.baseUrl+'/notes', this.httpOptions).pipe(
       map((notes) => notes.filter((note)=>
-      note.title.toLowerCase().includes(searchWord.toLowerCase()) ||
-      note.description.toLowerCase().includes(searchWord.toLowerCase()) && note.categoryValue === selectedCategory)));
+      (note.title.toLowerCase().includes(searchWord.toLowerCase()) ||
+      note.description.toLowerCase().includes(searchWord.toLowerCase())) && note.categoryValue === selectedCategory)));
   }
 
   deleteNote(id: string) {

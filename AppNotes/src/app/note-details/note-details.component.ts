@@ -18,7 +18,7 @@ export class NoteDetailsComponent implements OnInit {
   noteId: string;
   isEdit: boolean;
 
-  category: Category[];
+  categories: Category[];
   
   noteForm: FormGroup;
 
@@ -51,7 +51,7 @@ export class NoteDetailsComponent implements OnInit {
         map((notes)=>notes.filter((note) => note.id === this.noteId))
       )
     }
-    this.category=this.categoryService.getCategories();
+    this.categories=this.categoryService.getCategories();
     this.noteForm = this.formBuilder.group({
       title: ["", Validators.required],
       description: ["", Validators.required],

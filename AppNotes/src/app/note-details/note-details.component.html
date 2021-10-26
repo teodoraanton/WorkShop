@@ -19,7 +19,7 @@
     <mat-form-field appearance="fill">
         <mat-label>Category</mat-label>
         <mat-select>
-          <mat-option *ngFor="let cat of category" [value]="cat.value" [(ngModel)]="selectCategory">
+          <mat-option *ngFor="let cat of categories" [value]="cat.value" [(ngModel)]="selectCategory">
             {{cat.viewValue}}
           </mat-option>
         </mat-select>
