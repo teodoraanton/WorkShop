@@ -14,7 +14,10 @@ export class FilterComponent implements OnInit {
 
   @Output() emitSelectedFilter = new EventEmitter<string>();
 
-  constructor(private categoryService: CategoryService, private noteService: NoteService) { }
+  constructor(
+    private categoryService: CategoryService, 
+    private noteService: NoteService
+    ) { }
 
   ngOnInit(): void {
     this.categories=this.categoryService.getCategories()

@@ -1,5 +1,6 @@
 import { Component, EventEmitter, Input, OnChanges, OnInit, Output } from '@angular/core';
 import { Router } from '@angular/router';
+import { Observable } from 'rxjs';
 import { Note } from '../models/note';
 import { NoteService } from '../services/note.service';
 
@@ -9,19 +10,15 @@ import { NoteService } from '../services/note.service';
   styleUrls: ['./note.component.scss'],
 })
 export class NoteComponent implements OnInit, OnChanges {
-  notes: Note[] = [];
+  notes$: Observable<Note[]>;
+  searchWord: string;
 
   @Input() selectedCategory: string;
-  @Input() searchWord: string;
-
-  //@Output() emitSearchWord = new EventEmitter<string>();
 
   constructor(private router: Router, private noteService: NoteService) {}
 
   ngOnInit(): void {
-    this.noteService.getNotes().subscribe((result) => {
-      this.notes = result;
-    });
+    this.notes$ = this.noteService.getNotes();
   }
 
   ngOnChanges(): void {
@@ -30,30 +27,19 @@ export class NoteComponent implements OnInit, OnChanges {
 
   filterNotes() {
     if (this.searchWord && this.selectedCategory) {
-      this.noteService
-        .getFilteredAndSearchedNotes(this.selectedCategory, this.searchWord)
-        .subscribe((result) => {
-          this.notes = result;
-        });
+      this.notes$ = this.noteService.getFilteredAndSearchedNotes(this.selectedCategory, this.searchWord);
     } else if (this.searchWord) {
-      this.noteService.getSearchedNotes(this.searchWord).subscribe((result) => {
-        this.notes = result;
-      });
+      this.notes$ = this.noteService.getSearchedNotes(this.searchWord);
     } else if (this.selectedCategory) {
-      this.noteService
-        .getFiltredNotes(this.selectedCategory)
-        .subscribe((result) => {
-          this.notes = result;
-        });
+      this.notes$ = this.noteService.getFiltredNotes(this.selectedCategory);
     } else {
       return;
     }
   }
 
   clearAllFilters(){
-    this.noteService.getNotes().subscribe((result) => {
-      this.notes = result;
-    });
+    this.notes$ = this.noteService.getNotes();
+    this.searchWord='';
   }
 
   addNotePage(): void {
@@ -62,9 +48,7 @@ export class NoteComponent implements OnInit, OnChanges {
 
   deleteNote(id: string) {
     this.noteService.deleteNote(id);
-    this.noteService.getNotes().subscribe((result) => {
-      this.notes = result;
-    });
+    this.notes$ = this.noteService.getNotes();
   }
 
   editNote(note) {

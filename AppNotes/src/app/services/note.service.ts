@@ -27,13 +27,9 @@ export class NoteService {
     );
   }
 
-  addNote(noteTitle:string, noteDescription:string, noteCategoryId:string) {
-    const note: Note ={
-      title: noteTitle,
-      description: noteDescription,
-      categoryValue: noteCategoryId
-    }
-    return this.httpClient.post(this.baseUrl+"/note", note).subscribe();
+  addNote(notes: Note) {
+    const note: Note = notes;
+    return this.httpClient.post(this.baseUrl+"/note", note);
   }
 
   editNote(notes: Note){
@@ -42,7 +38,7 @@ export class NoteService {
       description: notes.description,
       categoryValue: notes.categoryValue
     }
-    return this.httpClient.put(this.baseUrl+"/note", note).subscribe();
+    return this.httpClient.put(this.baseUrl+"/note", note);
   }
   
   getFiltredNotes(selectedCategory: string){
@@ -70,6 +66,6 @@ export class NoteService {
   }
 
   deleteNote(id: string) {
-    return this.httpClient.delete(this.baseUrl+'/note/'+id).subscribe();
+    return this.httpClient.delete(this.baseUrl+'/note/'+id);
   }
 }

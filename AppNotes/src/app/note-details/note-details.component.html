@@ -2,7 +2,7 @@
 <form class="note-details-form" [formGroup]="noteForm">
     <mat-form-field>
         <mat-label>Title *</mat-label>
-        <input matInput name="title" formControlName="title" placeholder="Enter title" [(ngModel)]="title"/>
+        <input matInput name="title" formControlName="title" placeholder="Enter title"/>
         <mat-error *ngIf="titleControl?.invalid && (titleControl?.dirty || titleControl?.touched)" class="alert">
           *Title is required.
         </mat-error>
@@ -10,7 +10,7 @@
 
     <mat-form-field>
         <mat-label>Description *</mat-label><br>
-        <textarea matInput  name="inputNote" formControlName="description" placeholder="Enter description" [(ngModel)]="description"></textarea>
+        <textarea matInput  name="inputNote" formControlName="description" placeholder="Enter description"></textarea>
         <mat-error *ngIf="descriptionControl?.invalid && (descriptionControl?.dirty || descriptionControl?.touched)" class="alert">
           *Description is required.
         </mat-error>
@@ -18,9 +18,9 @@
 
     <mat-form-field appearance="fill">
         <mat-label>Category</mat-label>
-        <mat-select>
-          <mat-option *ngFor="let cat of categories" [value]="cat.value" [(ngModel)]="selectCategory">
-            {{cat.viewValue}}
+        <mat-select formControlName="category" [(ngModel)]="selectCategory">
+          <mat-option *ngFor="let cat of categories" [value]="cat" >
+            {{cat.value}}
           </mat-option>
         </mat-select>
         <mat-error *ngIf="categoryControl?.invalid && (categoryControl?.dirty || categoryControl?.touched)" class="alert">
@@ -28,5 +28,5 @@
         </mat-error>
       </mat-form-field>
 
-    <button mat-raised-button color="primary" (click)="add()" >ADD</button>
+    <button mat-raised-button color="primary" [disabled]="noteForm.invalid" (click)="add()" >ADD</button>
 </form>

@@ -6,16 +6,16 @@ export class CategoryService {
 
   categories: Category[] = [
     {
-      value: '1',
-      viewValue: 'To Do'
+      id: '1',
+      value: 'To Do'
     },
     {
-      value: '2',
-      viewValue: 'Done'
+      id: '2',
+      value: 'Done'
     },
     {
-      value: '3',
-      viewValue: 'Doing'
+      id: '3',
+      value: 'Doing'
     }
   ];
 

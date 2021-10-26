@@ -18,11 +18,5 @@ export class HomeComponent implements OnInit {
 
   receivedCategory(categoryId: string) {
     this.categoryValue = categoryId;
-    this.wordSearch = "";
-  }
-
-  receiveSearch(searchWord: string){
-    this.wordSearch = searchWord;
-    this.categoryValue = "";
   }
 }

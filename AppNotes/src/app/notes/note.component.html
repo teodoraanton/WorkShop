@@ -13,7 +13,7 @@
 </div>
 
 <div class="filter-container">
-  <div class="filter-div" *ngFor="let note of notes">
+  <div class="filter-div" *ngFor="let note of notes$ | async">
     <mat-card class="card-note">
       <mat-card-title>
         {{ note.title }}
