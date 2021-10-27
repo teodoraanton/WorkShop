@@ -8,7 +8,7 @@ namespace NotesApi.Controllers
 {
     public class CategoryController: ControllerBase
     {
-        List<Category> categories = new List<Category>
+        static List<Category> categories = new List<Category>
         {
             new Category()
             {
@@ -59,13 +59,14 @@ namespace NotesApi.Controllers
         /// </summary>
         /// <param name="cat"></param>
         [HttpPost]
-        public void Post([FromBody] Category cat)
+        public IActionResult Post([FromBody] Category cat)
         {
             if(cat == null)
             {
                 BadRequest();
             }
             categories.Add(cat);
+            return Ok();
         }
 
         /// <summary>
@@ -81,6 +82,7 @@ namespace NotesApi.Controllers
                 BadRequest();
             }
             categories.Remove(category);
+            Ok();
         }
     }
 }

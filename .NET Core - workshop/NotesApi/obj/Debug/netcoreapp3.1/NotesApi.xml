@@ -29,18 +29,6 @@
             </summary>
             <param name="id"></param>
         </member>
-        <member name="M:NotesApi.Controllers.NotesController.GetWithParameters(System.String)">
-            <summary>
-                Returns a list of notes
-            </summary>
-            <returns></returns>
-        </member>
-        <member name="M:NotesApi.Controllers.NotesController.Get">
-            <summary>
-            
-            </summary>
-            <returns></returns>
-        </member>
         <member name="M:NotesApi.Controllers.WeatherForecastController.Get">
             <summary>
                 Return the weather
