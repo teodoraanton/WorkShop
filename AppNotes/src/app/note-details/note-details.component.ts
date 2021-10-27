@@ -22,7 +22,7 @@ import { NoteService } from '../services/note.service';
 export class NoteDetailsComponent implements OnInit {
   noteId: string;
   isEdit: boolean;
-  selectCategory: string;
+  selectCategory: Category;
   note: Note;
   category: string;
 
@@ -79,11 +79,6 @@ export class NoteDetailsComponent implements OnInit {
         categoryValue: '',
       });
     }
-    this.noteForm = this.formBuilder.group({
-      title: ['', Validators.required],
-      description: ['', Validators.required],
-      category: ['', Validators.required],
-    });
   }
 
   add() {

@@ -43,12 +43,11 @@ export class NoteComponent implements OnInit, OnChanges {
   }
 
   addNotePage(): void {
-    this.router.navigate(['/note-details'], { queryParams: { noteId: '' } });
+    this.router.navigate(['/note-details']);
   }
 
   deleteNote(id: string) {
     this.noteService.deleteNote(id);
-    this.notes$ = this.noteService.getNotes();
   }
 
   editNote(note) {
