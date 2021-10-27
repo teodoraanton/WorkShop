@@ -85,6 +85,20 @@ namespace NotesApi.Controllers
             return Ok(note);
         }
 
+        [HttpGet("{id}", Name = "GetNoteById")]
+        public IActionResult GetByNoteId(Guid id)
+        {
+            List<Notes> note = _notes.FindAll(note => note.Id == id);
+            return Ok(note);
+        }
+
+        [HttpPost]
+        public IActionResult Create(Notes note)
+        {
+            _notes.Add(note);
+            return CreatedAtRoute("GetNoteById", new { id = note.Id.ToString() }, note);
+        }
+
         ///// <summary>
         /////     Returns a list of notes
         ///// </summary>
