@@ -12,61 +12,36 @@ namespace NotesApi.Controllers
     [Route("[controller]")]
     public class NotesController : ControllerBase
     {
-        static List<Notes> _notes = new List<Notes> 
+        private static List<Notes> _notes = new List<Notes> 
         { 
-            new Notes 
-            { 
-                Id = new System.Guid(), 
-                CategoryId = "1", 
-                OwnerId = new System.Guid("833400e7-30cb-494b-887d-139d7a193451"), 
-                Title = "First Note", 
-                Description = "First Note Description" 
-            },
-            new Notes 
-            { 
-                Id = new System.Guid(), 
-                CategoryId = "1", 
-                OwnerId = new System.Guid("833400e7-30cb-494b-887d-139d7a193451"), 
-                Title = "Second Note", 
-                Description = "Second Note Description" 
-            },
-            new Notes 
-            { 
-                Id = new System.Guid(), 
-                CategoryId = "1", 
-                OwnerId = new System.Guid(), 
-                Title = "Third Note", 
-                Description = "Third Note Description" 
-            },
-            new Notes 
-            { 
-                Id = new System.Guid(), 
-                CategoryId = "1", 
-                OwnerId = new System.Guid(), 
-                Title = "Fourth Note", 
-                Description = "Fourth Note Description" 
-            },
-            new Notes 
-            { 
-                Id = new System.Guid(), 
-                CategoryId = "1", 
-                OwnerId = new System.Guid(), 
-                Title = "Fifth Note", 
-                Description = "Fifth Note Description" 
-            }
+            new Notes { Id = Guid.NewGuid(), CategoryId = "1", OwnerId = new Guid("00000000-0000-0000-0000-000000000001"), Title = "First Note", Description = "First Note Description" },
+            new Notes { Id = Guid.NewGuid(), CategoryId = "1", OwnerId = new Guid("00000000-0000-0000-0000-000000000001"), Title = "Second Note", Description = "Second Note Description" },
+            new Notes { Id = Guid.NewGuid(), CategoryId = "1", OwnerId = new Guid("00000000-0000-0000-0000-000000000001"), Title = "Third Note", Description = "Third Note Description" },
+            new Notes { Id = Guid.NewGuid(), CategoryId = "1", OwnerId = new Guid("00000000-0000-0000-0000-000000000001"), Title = "Fourth Note", Description = "Fourth Note Description" },
+            new Notes { Id = Guid.NewGuid(), CategoryId = "1", OwnerId = new Guid("00000000-0000-0000-0000-000000000001"), Title = "Fifth Note", Description = "Fifth Note Description" }
         };
+
 
         public NotesController()
         {
 
         }
 
+        /// <summary>
+        ///     Return the list of notes
+        /// </summary>
+        /// <returns></returns>
         [HttpGet]
         public IActionResult GetNotes()
         {
             return Ok(_notes);
         }
 
+        /// <summary>
+        ///     Add a new note in list
+        /// </summary>
+        /// <param name="note"></param>
+        /// <returns></returns>
         [HttpPost]
         public IActionResult CreateNote([FromBody] Notes note)
         {
@@ -78,6 +53,11 @@ namespace NotesApi.Controllers
             return Ok();
         }
 
+        /// <summary>
+        ///     Return on another route a note with a specified owner id
+        /// </summary>
+        /// <param name="id"></param>
+        /// <returns></returns>
         [HttpGet("OwnerId/{id}")]
         public IActionResult GetByOwnerId(Guid id)
         {
@@ -85,6 +65,11 @@ namespace NotesApi.Controllers
             return Ok(note);
         }
 
+        /// <summary>
+        ///     Return the note with the specified id
+        /// </summary>
+        /// <param name="id"></param>
+        /// <returns></returns>
         [HttpGet("{id}", Name = "GetNoteById")]
         public IActionResult GetByNoteId(Guid id)
         {
@@ -92,11 +77,73 @@ namespace NotesApi.Controllers
             return Ok(note);
         }
 
-        [HttpPost]
+        [HttpPost("CreateNote")]
         public IActionResult Create(Notes note)
         {
             _notes.Add(note);
             return CreatedAtRoute("GetNoteById", new { id = note.Id.ToString() }, note);
+        }
+
+        /// <summary>
+        ///     Return the list of notes with a note updated
+        /// </summary>
+        /// <param name="id"></param>
+        /// <param name="noteToUpdate"></param>
+        /// <returns></returns>
+        [HttpPut("{id}")]
+        public IActionResult UpdateNote(Guid id, [FromBody] Notes noteToUpdate)
+        {
+            if(noteToUpdate == null)
+            {
+                return BadRequest("Note cannot be null");
+            }
+            int indexNote = _notes.FindIndex(note => note.Id == id);
+            if(indexNote == -1)
+            {
+                return NotFound();
+            }
+            noteToUpdate.Id = _notes[indexNote].Id;
+            _notes[indexNote] = noteToUpdate;
+            return Ok(_notes[indexNote]);
+        }
+
+        /// <summary>
+        ///     Delete a note with the specified id
+        /// </summary>
+        /// <param name="id"></param>
+        /// <returns></returns>
+        [HttpDelete("{id}")]
+        public IActionResult DeleteNote(Guid id)
+        {
+            var index = _notes.FindIndex(note => note.Id == id);
+            if (index == -1)
+            {
+                return NotFound();
+            }
+            _notes.RemoveAt(index);
+            return NoContent();
+        }
+
+        /// <summary>
+        ///     Updated title for a note with specified id
+        /// </summary>
+        /// <param name="id"></param>
+        /// <param name="title"></param>
+        /// <returns></returns>
+        [HttpPatch("{id}/title")]
+        public IActionResult UpdateTitleNote (Guid id, [FromBody] string title)
+        {
+            if(string.IsNullOrEmpty(title))
+            {
+                return BadRequest("The string cannot be null");
+            }
+            var index = _notes.FindIndex(note => note.Id == id);
+            if (index == -1)
+            {
+                return NotFound();
+            }
+            _notes[index].Title = title;
+            return Ok(_notes[index]);
         }
 
         ///// <summary>
