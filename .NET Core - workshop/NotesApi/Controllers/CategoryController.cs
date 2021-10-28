@@ -74,7 +74,7 @@ namespace NotesApi.Controllers
         /// </summary>
         /// <param name="id"></param>
         [HttpDelete("{id}")]
-        public void Delete(string id)
+        public IActionResult Delete(string id)
         {
             var category = categories.FirstOrDefault(category => category.id == id);
             if (category == null)
@@ -82,7 +82,7 @@ namespace NotesApi.Controllers
                 BadRequest();
             }
             categories.Remove(category);
-            Ok();
+            return Ok();
         }
     }
 }

@@ -37,7 +37,7 @@
         </member>
         <member name="M:NotesApi.Controllers.NotesController.CreateNote(NotesApi.Models.Notes)">
             <summary>
-                Add 
+                Add a new note in list
             </summary>
             <param name="note"></param>
             <returns></returns>
@@ -69,6 +69,59 @@
                 Delete a note with the specified id
             </summary>
             <param name="id"></param>
+            <returns></returns>
+        </member>
+        <member name="M:NotesApi.Controllers.NotesController.UpdateTitleNote(System.Guid,System.String)">
+            <summary>
+                Updated title for a note with specified id
+            </summary>
+            <param name="id"></param>
+            <param name="title"></param>
+            <returns></returns>
+        </member>
+        <member name="M:NotesApi.Controllers.NotesController.UpdateNoteByOwnerAndNoteId(System.Guid,System.Guid,NotesApi.Models.Notes)">
+            <summary>
+                Update a note with a owner id and note id specified
+            </summary>
+            <param name="OwnerId"></param>
+            <param name="NoteId"></param>
+            <param name="note"></param>
+            <returns></returns>
+        </member>
+        <member name="M:NotesApi.Controllers.NotesController.DeleteNoteByOwnerAndNoteId(System.Guid,System.Guid)">
+            <summary>
+                Delete a note with owner and note id specified
+            </summary>
+            <param name="OwnerId"></param>
+            <param name="NoteId"></param>
+            <returns></returns>
+        </member>
+        <member name="M:NotesApi.Controllers.OwnerController.GetOwners">
+            <summary>
+                Return the list of owners
+            </summary>
+            <returns></returns>
+        </member>
+        <member name="M:NotesApi.Controllers.OwnerController.CreateOwner(NotesApi.Models.Owner)">
+            <summary>
+                Add a new owner in list
+            </summary>
+            <param name="owner"></param>
+            <returns></returns>
+        </member>
+        <member name="M:NotesApi.Controllers.OwnerController.DeleteOwner(System.Guid)">
+            <summary>
+                Delete a owner with a specified id
+            </summary>
+            <param name="id"></param>
+            <returns></returns>
+        </member>
+        <member name="M:NotesApi.Controllers.OwnerController.UpdateOwner(System.Guid,NotesApi.Models.Owner)">
+            <summary>
+                Update a owner with specified id
+            </summary>
+            <param name="id"></param>
+            <param name="owner"></param>
             <returns></returns>
         </member>
         <member name="M:NotesApi.Controllers.WeatherForecastController.Get">

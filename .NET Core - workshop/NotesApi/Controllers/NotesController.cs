@@ -14,11 +14,46 @@ namespace NotesApi.Controllers
     {
         private static List<Notes> _notes = new List<Notes> 
         { 
-            new Notes { Id = Guid.NewGuid(), CategoryId = "1", OwnerId = new Guid("00000000-0000-0000-0000-000000000001"), Title = "First Note", Description = "First Note Description" },
-            new Notes { Id = Guid.NewGuid(), CategoryId = "1", OwnerId = new Guid("00000000-0000-0000-0000-000000000001"), Title = "Second Note", Description = "Second Note Description" },
-            new Notes { Id = Guid.NewGuid(), CategoryId = "1", OwnerId = new Guid("00000000-0000-0000-0000-000000000001"), Title = "Third Note", Description = "Third Note Description" },
-            new Notes { Id = Guid.NewGuid(), CategoryId = "1", OwnerId = new Guid("00000000-0000-0000-0000-000000000001"), Title = "Fourth Note", Description = "Fourth Note Description" },
-            new Notes { Id = Guid.NewGuid(), CategoryId = "1", OwnerId = new Guid("00000000-0000-0000-0000-000000000001"), Title = "Fifth Note", Description = "Fifth Note Description" }
+            new Notes 
+            { 
+                Id = Guid.NewGuid(), 
+                CategoryId = "1", 
+                OwnerId = new Guid("00000000-0000-0000-0000-000000000001"), 
+                Title = "First Note", 
+                Description = "First Note Description" 
+            },
+            new Notes 
+            { 
+                Id = Guid.NewGuid(), 
+                CategoryId = "1", 
+                OwnerId = new Guid("00000000-0000-0000-0000-000000000001"), 
+                Title = "Second Note", 
+                Description = "Second Note Description" 
+            },
+            new Notes 
+            { 
+                Id = Guid.NewGuid(), 
+                CategoryId = "1", 
+                OwnerId = new Guid("00000000-0000-0000-0000-000000000001"), 
+                Title = "Third Note", 
+                Description = "Third Note Description" 
+            },
+            new Notes 
+            { 
+                Id = Guid.NewGuid(), 
+                CategoryId = "1", 
+                OwnerId = new Guid("00000000-0000-0000-0000-000000000002"), 
+                Title = "Fourth Note", 
+                Description = "Fourth Note Description" 
+            },
+            new Notes 
+            {
+                Id = Guid.NewGuid(), 
+                CategoryId = "1", 
+                OwnerId = new Guid("00000000-0000-0000-0000-000000000002"), 
+                Title = "Fifth Note", 
+                Description = "Fifth Note Description" 
+            }
         };
 
 
@@ -112,7 +147,7 @@ namespace NotesApi.Controllers
         /// </summary>
         /// <param name="id"></param>
         /// <returns></returns>
-        [HttpDelete("{id}")]
+        [HttpDelete("id/{id}")]
         public IActionResult DeleteNote(Guid id)
         {
             var index = _notes.FindIndex(note => note.Id == id);
@@ -144,6 +179,63 @@ namespace NotesApi.Controllers
             }
             _notes[index].Title = title;
             return Ok(_notes[index]);
+        }
+
+        /// <summary>
+        ///     Update a note with a owner id and note id specified
+        /// </summary>
+        /// <param name="OwnerId"></param>
+        /// <param name="NoteId"></param>
+        /// <param name="note"></param>
+        /// <returns></returns>
+        [HttpPut("{OwnerId},{NoteId}")]
+        public IActionResult UpdateNoteByOwnerAndNoteId(Guid OwnerId, Guid NoteId, [FromBody] Notes note)
+        {
+            if (note == null)
+            {
+                return BadRequest("Note cannot be null");
+            }
+            int indexNote = _notes.FindIndex(note => note.Id == NoteId && note.OwnerId == OwnerId);
+            if (indexNote == -1)
+            {
+                return NotFound();
+            }
+            note.Id = _notes[indexNote].Id;
+            _notes[indexNote] = note;
+            return Ok(_notes[indexNote]);
+        }
+
+        /// <summary>
+        ///     Delete a note with owner and note id specified
+        /// </summary>
+        /// <param name="OwnerId"></param>
+        /// <param name="NoteId"></param>
+        /// <returns></returns>
+        [HttpDelete("{NoteId}/{OwnerId}")]
+        public IActionResult DeleteNoteByOwnerAndNoteId(Guid OwnerId, Guid NoteId)
+        {
+            var index = _notes.FindIndex(note => note.Id == NoteId && note.OwnerId == OwnerId);
+            if (index == -1)
+            {
+                return NotFound();
+            }
+            _notes.RemoveAt(index);
+            return NoContent();
+        }
+
+        [HttpDelete("owner/{OwnerId}")]
+        public IActionResult DeleteAllNotesByOwnerId(Guid ownerId)
+        {
+            List<Notes> notes = _notes.FindAll(note => note.OwnerId == ownerId);
+            if(notes == null)
+            {
+                return NotFound();
+            }
+            foreach (Notes note in notes)
+            {
+                _notes.Remove(note);
+            }
+            return Ok();
         }
 
         ///// <summary>
