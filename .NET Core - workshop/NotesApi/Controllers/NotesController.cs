@@ -223,18 +223,19 @@ namespace NotesApi.Controllers
             return NoContent();
         }
 
-        [HttpDelete("owner/{OwnerId}")]
+        /// <summary>
+        ///     Delete All notes with owner id specified
+        /// </summary>
+        /// <param name="ownerId"></param>
+        /// <returns></returns>
+        [HttpDelete("{ownerId}")]
         public IActionResult DeleteAllNotesByOwnerId(Guid ownerId)
         {
-            List<Notes> notes = _notes.FindAll(note => note.OwnerId == ownerId);
-            if(notes == null)
+            if(_notes.Any(note => note.OwnerId != ownerId))
             {
                 return NotFound();
             }
-            foreach (Notes note in notes)
-            {
-                _notes.Remove(note);
-            }
+            _notes.RemoveAll(note => note.OwnerId == ownerId);
             return Ok();
         }
 
