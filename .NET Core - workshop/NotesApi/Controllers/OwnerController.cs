@@ -1,5 +1,6 @@
 ﻿using Microsoft.AspNetCore.Mvc;
 using NotesApi.Models;
+using NotesApi.Services;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -7,40 +8,14 @@ using System.Threading.Tasks;
 
 namespace NotesApi.Controllers
 {
+    [ApiController]
+    [Route("[controller]")]
     public class OwnerController: ControllerBase
     {
-        static List<Owner> _owners = new List<Owner>
+        IOwnerService _ownerService;
+        public OwnerController(IOwnerService ownerService)
         {
-            new Owner
-            {
-                Id = new System.Guid("00000000-0000-0000-0000-000000000001"),
-                Name = "Andreea"
-            },
-            new Owner
-            {
-                Id = new System.Guid(),
-                Name = "Ion"
-            },
-            new Owner
-            {
-                Id = new System.Guid(),
-                Name = "Maria"
-            },
-            new Owner
-            {
-                Id = new System.Guid(),
-                Name = "Marian"
-            },
-            new Owner
-            {
-                Id = new System.Guid(),
-                Name = "Ionut"
-            }
-        };
-
-        public OwnerController()
-        {
-
+            _ownerService = ownerService;
         }
 
         /// <summary>
@@ -50,7 +25,18 @@ namespace NotesApi.Controllers
         [HttpGet]
         public IActionResult GetOwners()
         {
-            return Ok(_owners);
+            return Ok(_ownerService.GetAll());
+        }
+
+        /// <summary>
+        ///     Return the owner with the specified id
+        /// </summary>
+        /// <param name="id"></param>
+        /// <returns></returns>
+        [HttpGet("OwnerId/{id}", Name = "GetOwnerById")]
+        public IActionResult GetOwnerById(Guid id)
+        {
+            return Ok(_ownerService.Get(id));
         }
 
         /// <summary>
@@ -65,8 +51,11 @@ namespace NotesApi.Controllers
             {
                 return BadRequest("Owner cannot be null");
             }
-            _owners.Add(owner);
-            return Ok();
+            if (_ownerService.create(owner))
+            {
+                return CreatedAtRoute("GetOwnerById", new { id = owner.Id.ToString() }, owner);
+            }
+            return NoContent();
         }
 
         /// <summary>
@@ -77,13 +66,11 @@ namespace NotesApi.Controllers
         [HttpDelete("id/{id}")]
         public IActionResult DeleteOwner(Guid id)
         {
-            var index = _owners.FindIndex(owner => owner.Id == id);
-            if (index == -1)
+            if(_ownerService.Delete(id))
             {
-                return NotFound();
+                return Ok();
             }
-            _owners.RemoveAt(index);
-            return NoContent();
+            return NotFound();
         }
 
         /// <summary>
@@ -99,14 +86,11 @@ namespace NotesApi.Controllers
             {
                 return BadRequest("Owner cannot be null");
             }
-            int index = _owners.FindIndex(owner => owner.Id == id);
-            if (index == -1)
+            if(_ownerService.Update(id, owner))
             {
-                return NotFound();
+                return Ok();
             }
-            owner.Id = _owners[index].Id;
-            _owners[index] = owner;
-            return Ok(_owners[index]);
+            return NoContent();
         }
     }
 }

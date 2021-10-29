@@ -51,17 +51,21 @@ namespace NotesApi.Controllers
             return NoContent();
         }
 
-        ///// <summary>
-        /////     Return on another route a note with a specified owner id
-        ///// </summary>
-        ///// <param name="id"></param>
-        ///// <returns></returns>
-        //[HttpGet("OwnerId/{id}")]
-        //public IActionResult GetByOwnerId(Guid id)
-        //{
-        //    List<Notes> note = _notes.FindAll(note => note.OwnerId == id);
-        //    return Ok(note);
-        //}
+        /// <summary>
+        ///     Return on another route a note with a specified owner id
+        /// </summary>
+        /// <param name="id"></param>
+        /// <returns></returns>
+        [HttpGet("OwnerId/{id}")]
+        public IActionResult GetByOwnerId(Guid id)
+        {
+            List<Notes> notes = _noteCollectionService.GetNotesByOwnerId(id);
+            if(notes == null)
+            {
+                return NotFound();
+            }
+            return Ok(notes);
+        }
 
         /// <summary>
         ///     Return the note with the specified id
@@ -79,45 +83,40 @@ namespace NotesApi.Controllers
             return Ok(note);
         }
 
-        ///// <summary>
-        /////     Return the list of notes with a note updated
-        ///// </summary>
-        ///// <param name="id"></param>
-        ///// <param name="noteToUpdate"></param>
-        ///// <returns></returns>
-        //[HttpPut("{id}")]
-        //public IActionResult UpdateNote(Guid id, [FromBody] Notes noteToUpdate)
-        //{
-        //    if(noteToUpdate == null)
-        //    {
-        //        return BadRequest("Note cannot be null");
-        //    }
-        //    int indexNote = _notes.FindIndex(note => note.Id == id);
-        //    if(indexNote == -1)
-        //    {
-        //        return NotFound();
-        //    }
-        //    noteToUpdate.Id = _notes[indexNote].Id;
-        //    _notes[indexNote] = noteToUpdate;
-        //    return Ok(_notes[indexNote]);
-        //}
+        /// <summary>
+        ///     Return the list of notes with a note updated
+        /// </summary>
+        /// <param name="id"></param>
+        /// <param name="noteToUpdate"></param>
+        /// <returns></returns>
+        [HttpPut("{id}")]
+        public IActionResult UpdateNote(Guid id, [FromBody] Notes noteToUpdate)
+        {
+            if(noteToUpdate == null)
+            {
+                return BadRequest("Note cannot be null");
+            }
+            if(_noteCollectionService.Update(id,noteToUpdate))
+            {
+                return Ok();
+            }
+            return NoContent();
+        }
 
-        ///// <summary>
-        /////     Delete a note with the specified id
-        ///// </summary>
-        ///// <param name="id"></param>
-        ///// <returns></returns>
-        //[HttpDelete("id/{id}")]
-        //public IActionResult DeleteNote(Guid id)
-        //{
-        //    var index = _notes.FindIndex(note => note.Id == id);
-        //    if (index == -1)
-        //    {
-        //        return NotFound();
-        //    }
-        //    _notes.RemoveAt(index);
-        //    return NoContent();
-        //}
+        /// <summary>
+        ///     Delete a note with the specified id
+        /// </summary>
+        /// <param name="id"></param>
+        /// <returns></returns>
+        [HttpDelete("id/{id}")]
+        public IActionResult DeleteNote(Guid id)
+        {
+            if(_noteCollectionService.Delete(id))
+            {
+                return Ok();
+            }
+            return NotFound();
+        }
 
         ///// <summary>
         /////     Updated title for a note with specified id

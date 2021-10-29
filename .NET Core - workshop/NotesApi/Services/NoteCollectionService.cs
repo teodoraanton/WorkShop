@@ -60,13 +60,15 @@ namespace NotesApi.Services
         public bool create(Notes model)
         {
             _notes.Add(model);
-            bool isAdded = _notes.Contains(model); ;
+            bool isAdded = _notes.Contains(model);
             return isAdded;
         }
 
         public bool Delete(Guid id)
         {
-            throw new NotImplementedException();
+            Notes note = _notes.FirstOrDefault(note => note.Id == id);
+            bool isRemoved = _notes.Remove(note);
+            return isRemoved;
         }
 
         public Notes Get(Guid id)
@@ -81,12 +83,20 @@ namespace NotesApi.Services
 
         public List<Notes> GetNotesByOwnerId(Guid ownerId)
         {
-            throw new NotImplementedException();
+            return _notes.FindAll(note => note.OwnerId == ownerId);
         }
 
         public bool Update(Guid id, Notes model)
         {
-            throw new NotImplementedException();
+            int index = _notes.FindIndex(note => note.Id == id);
+            if(index == -1)
+            {
+                return false;
+            }
+            model.Id = _notes[index].Id;
+            _notes[index] = model;
+            bool isUpdated = _notes.Contains(model);
+            return isUpdated;
         }
     }
 }

@@ -42,7 +42,7 @@ namespace NotesApi.Controllers
         /// </summary>
         /// <param name="id"></param>
         /// <returns></returns>
-        [HttpGet("{id}")]
+        [HttpGet("id/{id}")]
         public IActionResult GetWithParameters(string id)
         {
             var category = categories.FirstOrDefault(category => category.id == id);
