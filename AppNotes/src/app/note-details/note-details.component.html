@@ -18,7 +18,7 @@
 
     <mat-form-field appearance="fill">
         <mat-label>Category</mat-label>
-        <mat-select formControlName="category" [(ngModel)]="selectCategory">
+        <mat-select formControlName="category">
           <mat-option *ngFor="let cat of categories" [value]="cat" >
             {{cat.value}}
           </mat-option>

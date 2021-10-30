@@ -82,7 +82,7 @@ export class NoteDetailsComponent implements OnInit {
   }
 
   add() {
-    this.note.title = this.titleControl.value();
+    this.note.title = this.titleControl.value()
     this.note.description = this.descriptionControl.value();
     this.note.categoryValue = this.categoryControl.value();
     this.noteService.addNote(this.note);

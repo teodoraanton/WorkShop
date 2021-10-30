@@ -38,7 +38,8 @@ export class NoteService {
       description: notes.description,
       categoryValue: notes.categoryValue
     }
-    return this.httpClient.put(this.baseUrl+"/note", note);
+    console.log("edit was called");
+    return this.httpClient.put(this.baseUrl+"/note", note).subscribe(()=>console.log("subscribe"));
   }
   
   getFiltredNotes(selectedCategory: string){
@@ -66,6 +67,6 @@ export class NoteService {
   }
 
   deleteNote(id: string) {
-    return this.httpClient.delete(this.baseUrl+'/note/'+id);
+    return this.httpClient.delete(this.baseUrl+'/note/'+id).subscribe();
   }
 }
