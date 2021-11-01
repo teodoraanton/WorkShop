@@ -38,8 +38,7 @@ export class NoteService {
       description: notes.description,
       categoryValue: notes.categoryValue
     }
-    console.log("edit was called");
-    return this.httpClient.put(this.baseUrl+"/note", note).subscribe(()=>console.log("subscribe"));
+    return this.httpClient.put(this.baseUrl+"/note", note).subscribe();
   }
   
   getFiltredNotes(selectedCategory: string){

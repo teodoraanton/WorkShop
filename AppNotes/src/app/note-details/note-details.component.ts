@@ -67,9 +67,9 @@ export class NoteDetailsComponent implements OnInit {
           map((notes) => notes.filter((note) => note.id === this.noteId)[0])
         )
         .subscribe((noteToEdit) => {
-          this.category = this.categories.filter(
+          this.selectCategory = this.categories.filter(
             (category) => category.id === noteToEdit.categoryValue
-          )[0].value;
+          )[0];
           this.setupNoteDetails(noteToEdit);
         });
     } else {
@@ -82,10 +82,12 @@ export class NoteDetailsComponent implements OnInit {
   }
 
   add() {
-    this.note.title = this.titleControl.value()
-    this.note.description = this.descriptionControl.value();
-    this.note.categoryValue = this.categoryControl.value();
-    this.noteService.addNote(this.note);
+    const note: Note = this.noteForm.value;
+    if(this.isEdit){
+      this.noteService.editNote(note);
+    }else{
+      this.noteService.addNote(note);
+    }
     this.router.navigateByUrl('');
   }
 
