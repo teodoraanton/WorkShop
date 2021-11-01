@@ -71,41 +71,6 @@
             <param name="id"></param>
             <returns></returns>
         </member>
-        <member name="M:NotesApi.Controllers.OwnerController.GetOwners">
-            <summary>
-                Return the list of owners
-            </summary>
-            <returns></returns>
-        </member>
-        <member name="M:NotesApi.Controllers.OwnerController.GetOwnerById(System.Guid)">
-            <summary>
-                Return the owner with the specified id
-            </summary>
-            <param name="id"></param>
-            <returns></returns>
-        </member>
-        <member name="M:NotesApi.Controllers.OwnerController.CreateOwner(NotesApi.Models.Owner)">
-            <summary>
-                Add a new owner in list
-            </summary>
-            <param name="owner"></param>
-            <returns></returns>
-        </member>
-        <member name="M:NotesApi.Controllers.OwnerController.DeleteOwner(System.Guid)">
-            <summary>
-                Delete a owner with a specified id
-            </summary>
-            <param name="id"></param>
-            <returns></returns>
-        </member>
-        <member name="M:NotesApi.Controllers.OwnerController.UpdateOwner(System.Guid,NotesApi.Models.Owner)">
-            <summary>
-                Update a owner with specified id
-            </summary>
-            <param name="id"></param>
-            <param name="owner"></param>
-            <returns></returns>
-        </member>
         <member name="M:NotesApi.Controllers.WeatherForecastController.Get">
             <summary>
                 Return the weather

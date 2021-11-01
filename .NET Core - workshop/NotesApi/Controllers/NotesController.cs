@@ -25,9 +25,10 @@ namespace NotesApi.Controllers
         /// </summary>
         /// <returns></returns>
         [HttpGet]
-        public IActionResult GetNotes()
+        public async Task<IActionResult> GetNotes()
         {
-            return Ok(_noteCollectionService.GetAll());
+            List<Notes> notes = await _noteCollectionService.GetAll();
+            return Ok(notes);
         }
 
 
@@ -38,13 +39,13 @@ namespace NotesApi.Controllers
         /// <param name="note"></param>
         /// <returns></returns>
         [HttpPost]
-        public IActionResult CreateNote([FromBody] Notes note)
+        public async Task<IActionResult> CreateNote([FromBody] Notes note)
         {
             if (note == null)
             {
                 return BadRequest("Note cannot be null");
             }
-            if (_noteCollectionService.create(note))
+            if (await _noteCollectionService.create(note))
             {
                 return CreatedAtRoute("GetNoteById", new { id = note.Id.ToString() }, note);
             }
@@ -57,9 +58,9 @@ namespace NotesApi.Controllers
         /// <param name="id"></param>
         /// <returns></returns>
         [HttpGet("OwnerId/{id}")]
-        public IActionResult GetByOwnerId(Guid id)
+        public async Task<IActionResult> GetByOwnerId(Guid id)
         {
-            List<Notes> notes = _noteCollectionService.GetNotesByOwnerId(id);
+            Task<List<Notes>> notes = _noteCollectionService.GetNotesByOwnerId(id);
             if(notes == null)
             {
                 return NotFound();
@@ -73,9 +74,9 @@ namespace NotesApi.Controllers
         /// <param name="id"></param>
         /// <returns></returns>
         [HttpGet("{id}", Name = "GetNoteById")]
-        public IActionResult GetByNoteId(Guid id)
+        public async Task<IActionResult> GetByNoteId(Guid id)
         {
-            Notes note = _noteCollectionService.Get(id);
+            Task<Notes> note = _noteCollectionService.Get(id);
             if (note == null)
             {
                 return NotFound();
@@ -90,13 +91,13 @@ namespace NotesApi.Controllers
         /// <param name="noteToUpdate"></param>
         /// <returns></returns>
         [HttpPut("{id}")]
-        public IActionResult UpdateNote(Guid id, [FromBody] Notes noteToUpdate)
+        public async Task<IActionResult> UpdateNote(Guid id, [FromBody] Notes noteToUpdate)
         {
             if(noteToUpdate == null)
             {
                 return BadRequest("Note cannot be null");
             }
-            if(_noteCollectionService.Update(id,noteToUpdate))
+            if(await _noteCollectionService.Update(id,noteToUpdate))
             {
                 return Ok();
             }
@@ -109,9 +110,9 @@ namespace NotesApi.Controllers
         /// <param name="id"></param>
         /// <returns></returns>
         [HttpDelete("id/{id}")]
-        public IActionResult DeleteNote(Guid id)
+        public async Task<IActionResult> DeleteNote(Guid id)
         {
-            if(_noteCollectionService.Delete(id))
+            if(await _noteCollectionService.Delete(id))
             {
                 return Ok();
             }

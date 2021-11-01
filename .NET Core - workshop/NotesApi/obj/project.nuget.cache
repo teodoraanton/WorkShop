@@ -1,15 +1,25 @@
 {
   "version": 2,
-  "dgSpecHash": "I/VKzt2u4POkXHildF60N4S6dHYuOOSAdijVvyfw3S+VJNLWmRGY5gYYFEYxq3VNL9jmuKwAzwzU8HOsul3OrA==",
+  "dgSpecHash": "MPJjCOtE51WDSehyH9XsE+IhjWalp8veGbc4UAuwPBZjREeYtUG152US4uTk41BthK3woorKsBRSrbv6MHtxog==",
   "success": true,
   "projectFilePath": "D:\\WorkShop\\.NET Core - workshop\\NotesApi\\NotesApi.csproj",
   "expectedPackageFiles": [
+    "C:\\Users\\LAPTOP-HP-TEODORA\\.nuget\\packages\\dnsclient\\1.4.0\\dnsclient.1.4.0.nupkg.sha512",
     "C:\\Users\\LAPTOP-HP-TEODORA\\.nuget\\packages\\microsoft.extensions.apidescription.server\\3.0.0\\microsoft.extensions.apidescription.server.3.0.0.nupkg.sha512",
+    "C:\\Users\\LAPTOP-HP-TEODORA\\.nuget\\packages\\microsoft.netcore.platforms\\2.1.2\\microsoft.netcore.platforms.2.1.2.nupkg.sha512",
     "C:\\Users\\LAPTOP-HP-TEODORA\\.nuget\\packages\\microsoft.openapi\\1.2.3\\microsoft.openapi.1.2.3.nupkg.sha512",
+    "C:\\Users\\LAPTOP-HP-TEODORA\\.nuget\\packages\\mongodb.bson.signed\\2.13.2\\mongodb.bson.signed.2.13.2.nupkg.sha512",
+    "C:\\Users\\LAPTOP-HP-TEODORA\\.nuget\\packages\\mongodb.driver.core.signed\\2.13.2\\mongodb.driver.core.signed.2.13.2.nupkg.sha512",
+    "C:\\Users\\LAPTOP-HP-TEODORA\\.nuget\\packages\\mongodb.driver.signed\\2.13.2\\mongodb.driver.signed.2.13.2.nupkg.sha512",
+    "C:\\Users\\LAPTOP-HP-TEODORA\\.nuget\\packages\\mongodb.libmongocrypt.signed\\1.2.2\\mongodb.libmongocrypt.signed.1.2.2.nupkg.sha512",
+    "C:\\Users\\LAPTOP-HP-TEODORA\\.nuget\\packages\\sharpcompress\\0.23.0\\sharpcompress.0.23.0.nupkg.sha512",
     "C:\\Users\\LAPTOP-HP-TEODORA\\.nuget\\packages\\swashbuckle.aspnetcore\\6.2.3\\swashbuckle.aspnetcore.6.2.3.nupkg.sha512",
     "C:\\Users\\LAPTOP-HP-TEODORA\\.nuget\\packages\\swashbuckle.aspnetcore.swagger\\6.2.3\\swashbuckle.aspnetcore.swagger.6.2.3.nupkg.sha512",
     "C:\\Users\\LAPTOP-HP-TEODORA\\.nuget\\packages\\swashbuckle.aspnetcore.swaggergen\\6.2.3\\swashbuckle.aspnetcore.swaggergen.6.2.3.nupkg.sha512",
-    "C:\\Users\\LAPTOP-HP-TEODORA\\.nuget\\packages\\swashbuckle.aspnetcore.swaggerui\\6.2.3\\swashbuckle.aspnetcore.swaggerui.6.2.3.nupkg.sha512"
+    "C:\\Users\\LAPTOP-HP-TEODORA\\.nuget\\packages\\swashbuckle.aspnetcore.swaggerui\\6.2.3\\swashbuckle.aspnetcore.swaggerui.6.2.3.nupkg.sha512",
+    "C:\\Users\\LAPTOP-HP-TEODORA\\.nuget\\packages\\system.buffers\\4.5.1\\system.buffers.4.5.1.nupkg.sha512",
+    "C:\\Users\\LAPTOP-HP-TEODORA\\.nuget\\packages\\system.runtime.compilerservices.unsafe\\5.0.0\\system.runtime.compilerservices.unsafe.5.0.0.nupkg.sha512",
+    "C:\\Users\\LAPTOP-HP-TEODORA\\.nuget\\packages\\system.text.encoding.codepages\\4.5.1\\system.text.encoding.codepages.4.5.1.nupkg.sha512"
   ],
   "logs": []
 }

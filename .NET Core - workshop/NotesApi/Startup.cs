@@ -6,7 +6,9 @@ using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
 using Microsoft.Extensions.Logging;
+using Microsoft.Extensions.Options;
 using NotesApi.Services;
+using NotesApi.Settings;
 using Swashbuckle.AspNetCore.SwaggerGen;
 using System;
 using System.Collections.Generic;
@@ -37,7 +39,9 @@ namespace NotesApi
                 c.IncludeXmlComments(xmlPath);
             });
             services.AddTransient<INoteCollectionService, NoteCollectionService>();
-            services.AddTransient<IOwnerService, OwnerService>();
+            //services.AddTransient<IOwnerService, OwnerService>();
+            services.Configure<MongoDBSettings>(Configuration.GetSection(nameof(MongoDBSettings)));
+            services.AddSingleton<IMongoDBSettings>(sp => sp.GetRequiredService<IOptions<MongoDBSettings>>().Value);
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
