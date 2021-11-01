@@ -39,9 +39,13 @@ namespace NotesApi
                 c.IncludeXmlComments(xmlPath);
             });
             services.AddTransient<INoteCollectionService, NoteCollectionService>();
-            //services.AddTransient<IOwnerService, OwnerService>();
+            services.AddTransient<IOwnerService, OwnerService>();
+
             services.Configure<MongoDBSettings>(Configuration.GetSection(nameof(MongoDBSettings)));
             services.AddSingleton<IMongoDBSettings>(sp => sp.GetRequiredService<IOptions<MongoDBSettings>>().Value);
+
+            services.Configure<MongoDBSettingsOwner>(Configuration.GetSection(nameof(MongoDBSettingsOwner)));
+            services.AddSingleton<IMongoDBSettingsOwner>(sp => sp.GetRequiredService<IOptions<MongoDBSettingsOwner>>().Value);
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.

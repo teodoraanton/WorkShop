@@ -1,77 +1,62 @@
-﻿//using NotesApi.Models;
-//using System;
-//using System.Collections.Generic;
-//using System.Linq;
-//using System.Threading.Tasks;
+﻿using MongoDB.Driver;
+using NotesApi.Models;
+using NotesApi.Settings;
+using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Threading.Tasks;
 
-//namespace NotesApi.Services
-//{
-//    public class OwnerService: IOwnerService
-//    {
-//        private static List<Owner> _owners = new List<Owner>
-//        {
-//            new Owner
-//            {
-//                Id = new System.Guid("00000000-0000-0000-0000-000000000001"),
-//                Name = "Andreea"
-//            },
-//            new Owner
-//            {
-//                Id = new System.Guid(),
-//                Name = "George"
-//            },
-//            new Owner
-//            {
-//                Id = new System.Guid(),
-//                Name = "Maria"
-//            },
-//            new Owner
-//            {
-//                Id = new System.Guid(),
-//                Name = "Marian"
-//            },
-//            new Owner
-//            {
-//                Id = new System.Guid(),
-//                Name = "Ionut"
-//            }
-//        };
+namespace NotesApi.Services
+{
+    public class OwnerService : IOwnerService
+    {
+        private readonly IMongoCollection<Owner> _owners;
 
-//        public bool create(Owner model)
-//        {
-//            _owners.Add(model);
-//            bool isAdded = _owners.Contains(model);
-//            return isAdded;
-//        }
+        public OwnerService(IMongoDBSettingsOwner settings)
+        {
+            var client = new MongoClient(settings.ConnectionString);
+            var database = client.GetDatabase(settings.DatabaseName);
 
-//        public bool Delete(Guid id)
-//        {
-//            Owner owner = _owners.FirstOrDefault(owner => owner.Id == id);
-//            bool isRemoved = _owners.Remove(owner);
-//            return isRemoved;
-//        }
+            _owners = database.GetCollection<Owner>(settings.OwnerCollectionName);
+        }
 
-//        public Owner Get(Guid id)
-//        {
-//            return _owners.FirstOrDefault(owner => owner.Id == id);
-//        }
+        public async Task<bool> create(Owner model)
+        {
+            await _owners.InsertOneAsync(model);
+            return true;
+        }
 
-//        public List<Owner> GetAll()
-//        {
-//            return _owners;
-//        }
+        public async Task<bool> Delete(Guid id)
+        {
+            var result = await _owners.DeleteOneAsync(owner => owner.Id == id);
+            if(!result.IsAcknowledged && result.DeletedCount == 0)
+            {
+                return false;
+            }
+            return true;
+        }
 
-//        public bool Update(Guid id, Owner model)
-//        {
-//            int index = _owners.FindIndex(owner => owner.Id == id);
-//            if(index == -1)
-//            {
-//                return false;
-//            }
-//            model.Id = _owners[index].Id;
-//            _owners[index] = model;
-//            bool isUpdated = _owners.Contains(model);
-//            return isUpdated;
-//        }
-//    }
-//}
+        public async Task<Owner> Get(Guid id)
+        {
+            return (await _owners.FindAsync(owner => owner.Id == id)).FirstOrDefault();
+        }
+
+        public async Task<List<Owner>> GetAll()
+        {
+            var result = await _owners.FindAsync(owner => true);
+            return result.ToList();
+        }
+
+        public async Task<bool> Update(Guid id, Owner model)
+        {
+            model.Id = id;
+            var result = await _owners.ReplaceOneAsync(owner => owner.Id == id, model);
+            if(!result.IsAcknowledged && result.ModifiedCount == 0)
+            {
+                await _owners.InsertOneAsync(model);
+                return false;
+            }
+            return true;
+        }
+    }
+}
