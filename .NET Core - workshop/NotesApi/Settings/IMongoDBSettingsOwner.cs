@@ -5,7 +5,7 @@ using System.Threading.Tasks;
 
 namespace NotesApi.Settings
 {
-    interface IMongoDBSettingsOwner
+    public interface IMongoDBSettingsOwner
     {
         string OwnerCollectionName
         {
