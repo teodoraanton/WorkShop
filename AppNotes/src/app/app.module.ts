@@ -19,8 +19,7 @@ import { MatSelectModule } from '@angular/material/select';
 import { CategoryService } from './services/category.service';
 import { MatInputModule } from '@angular/material/input';
 import { CommonModule } from '@angular/common';
-import { HttpClientModule, HTTP_INTERCEPTORS } from '@angular/common/http';
-import { HttpMockApiInterceptor } from './services/http-mock-api.interceptor';
+import { HttpClientModule } from '@angular/common/http';
 
 
 @NgModule({
@@ -49,13 +48,7 @@ import { HttpMockApiInterceptor } from './services/http-mock-api.interceptor';
   ],
   providers: [
     NoteService,
-    CategoryService,
-    {
-      provide: HTTP_INTERCEPTORS,
-      useClass: HttpMockApiInterceptor,
-      multi: true
-    }
-
+    CategoryService
   ],
   bootstrap: [AppComponent]
 })

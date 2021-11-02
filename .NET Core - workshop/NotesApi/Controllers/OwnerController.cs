@@ -69,7 +69,7 @@ namespace NotesApi.Controllers
         /// </summary>
         /// <param name="id"></param>
         /// <returns></returns>
-        [HttpDelete("id/{id}")]
+        [HttpDelete("{id}")]
         public async Task<IActionResult> DeleteOwner(Guid id)
         {
             if (await _ownerService.Delete(id))

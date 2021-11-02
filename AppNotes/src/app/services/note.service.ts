@@ -7,7 +7,7 @@ import { map } from 'rxjs/operators';
 
 @Injectable()
 export class NoteService {
-  readonly baseUrl = 'https://localhost:4200';
+  readonly baseUrl = 'https://localhost:5001';
   readonly httpOptions = {
     headers: new HttpHeaders({
       'Content-Type': 'application/json',
@@ -29,7 +29,7 @@ export class NoteService {
 
   addNote(notes: Note) {
     const note: Note = notes;
-    return this.httpClient.post(this.baseUrl+"/note", note);
+    return this.httpClient.post(this.baseUrl+"/notes", note);
   }
 
   editNote(notes: Note){
@@ -38,7 +38,7 @@ export class NoteService {
       description: notes.description,
       categoryValue: notes.categoryValue
     }
-    return this.httpClient.put(this.baseUrl+"/note", note).subscribe();
+    return this.httpClient.put(this.baseUrl+"/notes"+notes.id, note).subscribe();
   }
   
   getFiltredNotes(selectedCategory: string){
@@ -66,6 +66,6 @@ export class NoteService {
   }
 
   deleteNote(id: string) {
-    return this.httpClient.delete(this.baseUrl+'/note/'+id).subscribe();
+    return this.httpClient.delete(this.baseUrl+'/notes/'+id).subscribe();
   }
 }

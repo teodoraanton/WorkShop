@@ -109,7 +109,7 @@ namespace NotesApi.Controllers
         /// </summary>
         /// <param name="id"></param>
         /// <returns></returns>
-        [HttpDelete("id/{id}")]
+        [HttpDelete("{id}")]
         public async Task<IActionResult> DeleteNote(Guid id)
         {
             if(await _noteCollectionService.Delete(id))
