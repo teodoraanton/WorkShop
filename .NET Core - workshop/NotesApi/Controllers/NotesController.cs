@@ -90,7 +90,7 @@ namespace NotesApi.Controllers
         /// <param name="id"></param>
         /// <param name="noteToUpdate"></param>
         /// <returns></returns>
-        [HttpPut("{id}")]
+        [HttpPut]
         public async Task<IActionResult> UpdateNote(Guid id, [FromBody] Notes noteToUpdate)
         {
             if(noteToUpdate == null)

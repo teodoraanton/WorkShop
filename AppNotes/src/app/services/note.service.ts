@@ -32,13 +32,13 @@ export class NoteService {
     return this.httpClient.post(this.baseUrl+"/notes", note);
   }
 
-  editNote(notes: Note){
+  editNote(id: string, notes: Note){
     const note: Note ={
       title: notes.title,
       description: notes.description,
       categoryValue: notes.categoryValue
     }
-    return this.httpClient.put(this.baseUrl+"/notes"+notes.id, note).subscribe();
+    return this.httpClient.put(this.baseUrl+"/notes", note).subscribe();
   }
   
   getFiltredNotes(selectedCategory: string){

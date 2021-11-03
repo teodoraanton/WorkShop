@@ -83,8 +83,9 @@ export class NoteDetailsComponent implements OnInit {
 
   add() {
     const note: Note = this.noteForm.value;
+    const id: string = note.id;
     if(this.isEdit){
-      this.noteService.editNote(note);
+      this.noteService.editNote(note.id, note);
     }else{
       this.noteService.addNote(note);
     }
