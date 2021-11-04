@@ -83,13 +83,11 @@ export class NoteDetailsComponent implements OnInit {
 
   add() {
     const note: Note = this.noteForm.value;
-    const id: string = note.id;
     if(this.isEdit){
-      this.noteService.editNote(note.id, note);
+      this.noteService.editNote(note).subscribe(() => this.router.navigateByUrl(''));
     }else{
-      this.noteService.addNote(note);
+      this.noteService.addNote(note).subscribe(() => this.router.navigateByUrl(''));
     }
-    this.router.navigateByUrl('');
   }
 
   setupNoteDetails(noteToEdit: Note) {

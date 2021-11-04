@@ -18,7 +18,7 @@ export class NoteComponent implements OnInit, OnChanges {
   constructor(private router: Router, private noteService: NoteService) {}
 
   ngOnInit(): void {
-    this.notes$ = this.noteService.getNotes();
+    this.getNotes();
   }
 
   ngOnChanges(): void {
@@ -47,7 +47,14 @@ export class NoteComponent implements OnInit, OnChanges {
   }
 
   deleteNote(id: string) {
-    this.noteService.deleteNote(id);
+    this.noteService.deleteNote(id).subscribe(() => this.getNotes());
+    
+  }
+
+  getNotes(){
+    this.noteService.getNotes().subscribe((result) => {
+      this.notes$ = this.noteService.getNotes();
+    })
   }
 
   editNote(note) {

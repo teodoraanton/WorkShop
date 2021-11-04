@@ -32,13 +32,13 @@ export class NoteService {
     return this.httpClient.post(this.baseUrl+"/notes", note);
   }
 
-  editNote(id: string, notes: Note){
+  editNote(notes: Note){
     const note: Note ={
       title: notes.title,
       description: notes.description,
       categoryValue: notes.categoryValue
     }
-    return this.httpClient.put(this.baseUrl+"/notes", note).subscribe();
+    return this.httpClient.put(this.baseUrl+"/notes", note);
   }
   
   getFiltredNotes(selectedCategory: string){
@@ -66,6 +66,6 @@ export class NoteService {
   }
 
   deleteNote(id: string) {
-    return this.httpClient.delete(this.baseUrl+'/notes/'+id).subscribe();
+    return this.httpClient.delete(this.baseUrl+'/notes/'+id);
   }
 }
