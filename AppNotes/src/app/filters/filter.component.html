@@ -1,6 +1,6 @@
 <div class= "filter-container">
     <div class="filter-div" *ngFor="let category of categories">
-        <button mat-raised-button color= 'primary' (click)="selectCategory(category.id)">
+        <button mat-raised-button color= 'primary' (click)="selectCategory(category)">
             {{category.value | uppercase}}
         </button>
     </div>

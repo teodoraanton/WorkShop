@@ -1,6 +1,7 @@
 import { Component, EventEmitter, Input, OnChanges, OnInit, Output } from '@angular/core';
 import { Router } from '@angular/router';
 import { Observable } from 'rxjs';
+import { Category } from '../models/category';
 import { Note } from '../models/note';
 import { NoteService } from '../services/note.service';
 
@@ -10,15 +11,19 @@ import { NoteService } from '../services/note.service';
   styleUrls: ['./note.component.scss'],
 })
 export class NoteComponent implements OnInit, OnChanges {
-  notes$: Observable<Note[]>;
+  notes: Note[];
+  filteredNotes: Note[];
   searchWord: string;
 
-  @Input() selectedCategory: string;
+  @Input() selectedCategory: Category;
 
   constructor(private router: Router, private noteService: NoteService) {}
 
   ngOnInit(): void {
-    this.getNotes();
+    this.noteService.getNotes().subscribe((notes) => {
+      this.notes = notes;
+      this.filteredNotes = notes;
+    });
   }
 
   ngOnChanges(): void {
@@ -27,19 +32,30 @@ export class NoteComponent implements OnInit, OnChanges {
 
   filterNotes() {
     if (this.searchWord && this.selectedCategory) {
-      this.notes$ = this.noteService.getFilteredAndSearchedNotes(this.selectedCategory, this.searchWord);
+      this.filteredNotes = this.notes.filter((note) =>
+        (note.title.toLowerCase().includes(this.searchWord.toLowerCase())
+        || note.description.toLowerCase().includes(this.searchWord.toLowerCase())
+        && note.categoryId === this.selectedCategory.id)
+      );
     } else if (this.searchWord) {
-      this.notes$ = this.noteService.getSearchedNotes(this.searchWord);
+      this.filteredNotes = this.notes.filter((note) => 
+        note.title.toLowerCase().includes(this.searchWord.toLowerCase())
+        || note.description.toLowerCase().includes(this.searchWord.toLowerCase())
+      );
     } else if (this.selectedCategory) {
-      this.notes$ = this.noteService.getFiltredNotes(this.selectedCategory);
+      this.filteredNotes = this.notes.filter((note) =>
+        note.categoryId === this.selectedCategory.id  
+      );
     } else {
-      return;
+      if(!this.notes) return;
+      this.clearAllFilters();
     }
   }
 
   clearAllFilters(){
-    this.notes$ = this.noteService.getNotes();
     this.searchWord='';
+    this.selectedCategory=null;
+    this.filteredNotes=[...this.notes];
   }
 
   addNotePage(): void {
@@ -47,14 +63,13 @@ export class NoteComponent implements OnInit, OnChanges {
   }
 
   deleteNote(id: string) {
-    this.noteService.deleteNote(id).subscribe(() => this.getNotes());
+    this.noteService.deleteNote(id).subscribe((response) => {
+      this.notes = this.notes.filter((note) => note.id !== id);
+      this.filteredNotes = [...this.notes];
+    },
+    (err) => console.log(err)
+    );
     
-  }
-
-  getNotes(){
-    this.noteService.getNotes().subscribe((result) => {
-      this.notes$ = this.noteService.getNotes();
-    })
   }
 
   editNote(note) {

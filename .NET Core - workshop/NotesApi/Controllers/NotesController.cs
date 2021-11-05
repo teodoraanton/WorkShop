@@ -61,7 +61,7 @@ namespace NotesApi.Controllers
         public async Task<IActionResult> GetByOwnerId(Guid id)
         {
             Task<List<Notes>> notes = _noteCollectionService.GetNotesByOwnerId(id);
-            if(notes == null)
+            if (notes == null)
             {
                 return NotFound();
             }
@@ -85,7 +85,7 @@ namespace NotesApi.Controllers
         }
 
         /// <summary>
-        ///     Return the list of notes with a note updated
+        ///      Return the list of notes with a note updated
         /// </summary>
         /// <param name="id"></param>
         /// <param name="noteToUpdate"></param>

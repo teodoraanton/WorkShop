@@ -1,19 +1,16 @@
 import { Component, OnInit } from '@angular/core';
 import {
   FormBuilder,
-  FormControl,
   FormGroup,
-  FormGroupDirective,
-  NgForm,
   Validators,
 } from '@angular/forms';
-import { ErrorStateMatcher } from '@angular/material/core';
 import { ActivatedRoute, Router } from '@angular/router';
-import { filter, map } from 'rxjs/operators';
+import { map } from 'rxjs/operators';
 import { Category } from '../models/category';
 import { Note } from '../models/note';
 import { CategoryService } from '../services/category.service';
 import { NoteService } from '../services/note.service';
+import { Guid } from 'guid-typescript'
 @Component({
   selector: 'app-note-details',
   templateUrl: './note-details.component.html',
@@ -22,9 +19,8 @@ import { NoteService } from '../services/note.service';
 export class NoteDetailsComponent implements OnInit {
   noteId: string;
   isEdit: boolean;
-  selectCategory: Category;
-  note: Note;
-  category: string;
+  selectedCategory: Category;
+  category: Category;
 
   categories: Category[];
 
@@ -43,7 +39,6 @@ export class NoteDetailsComponent implements OnInit {
   }
 
   constructor(
-    private router: Router,
     private _activatedRoute: ActivatedRoute,
     private categoryService: CategoryService,
     private formBuilder: FormBuilder,
@@ -67,34 +62,42 @@ export class NoteDetailsComponent implements OnInit {
           map((notes) => notes.filter((note) => note.id === this.noteId)[0])
         )
         .subscribe((noteToEdit) => {
-          this.selectCategory = this.categories.filter(
-            (category) => category.id === noteToEdit.categoryValue
+          this.selectedCategory = this.categories.filter(
+            (category) => category.id === noteToEdit.categoryId
           )[0];
           this.setupNoteDetails(noteToEdit);
         });
     } else {
+      this.selectedCategory = this.categories[0];
       this.setupNoteDetails({
+        id: Guid.create().toString(),
         title: '',
         description: '',
-        categoryValue: '',
+        categoryId: '',
       });
     }
   }
 
   add() {
-    const note: Note = this.noteForm.value;
+    const note: Note = {
+      id: this.noteForm.get('id').value,
+      title: this.noteForm.get('title').value,
+      description: this.noteForm.get('description').value,
+      categoryId: this.noteForm.get('category').value.id
+    }
     if(this.isEdit){
-      this.noteService.editNote(note).subscribe(() => this.router.navigateByUrl(''));
+      this.noteService.editNote(note);
     }else{
-      this.noteService.addNote(note).subscribe(() => this.router.navigateByUrl(''));
+      this.noteService.addNote(note);
     }
   }
 
   setupNoteDetails(noteToEdit: Note) {
     this.noteForm = this.formBuilder.group({
+      id: noteToEdit.id,
       title: [noteToEdit.title, Validators.required],
       description: [noteToEdit.description, Validators.required],
-      category: ['', Validators.required],
+      category: this.selectedCategory,
     });
   }
 }

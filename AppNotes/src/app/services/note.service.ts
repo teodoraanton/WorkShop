@@ -1,4 +1,4 @@
-import { HttpClient, HttpClientModule, HttpHeaders } from '@angular/common/http';
+import { HttpClient, HttpClientModule, HttpErrorResponse, HttpHeaders } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Router } from '@angular/router';
 import { Observable } from 'rxjs/internal/Observable';
@@ -16,10 +16,6 @@ export class NoteService {
 
   constructor(private router: Router, private httpClient: HttpClient) { }
 
-  serviceCall() {
-    console.log("Note service was called");
-  }
-
   getNotes(): Observable<Note[]> {
     return this.httpClient.get<Note[]>(
       this.baseUrl + '/notes',
@@ -27,44 +23,18 @@ export class NoteService {
     );
   }
 
-  addNote(notes: Note) {
-    const note: Note = notes;
-    return this.httpClient.post(this.baseUrl+"/notes", note);
+  addNote(note: Note) {
+    return this.httpClient.post(this.baseUrl+"/notes", note).subscribe(response => {
+      this.router.navigate(['notes']);
+    }, (err: HttpErrorResponse) => console.log(err));
   }
 
-  editNote(notes: Note){
-    const note: Note ={
-      title: notes.title,
-      description: notes.description,
-      categoryValue: notes.categoryValue
-    }
-    return this.httpClient.put(this.baseUrl+"/notes", note);
+  editNote(note: Note){
+    return this.httpClient.put(this.baseUrl+"/notes/?id"+note.id, note).subscribe(response => {
+      this.router.navigate(['notes']);
+    }, (err:HttpErrorResponse) => console.log(err));
   }
   
-  getFiltredNotes(selectedCategory: string){
-    return this.httpClient
-      .get<Note[]>(this.baseUrl + '/notes', this.httpOptions)
-      .pipe(
-        map((notes) => notes.filter((note) => note.categoryValue === selectedCategory))
-      );
-  }
-
-  getSearchedNotes(searchWord: string){
-    return this.httpClient
-      .get<Note[]>(this.baseUrl + '/notes', this.httpOptions)
-      .pipe(
-        map((notes) => notes.filter((note) =>
-         note.title.toLowerCase().includes(searchWord.toLowerCase()) || note.description.toLowerCase().includes(searchWord.toLowerCase())))
-      );
-  }
-
-  getFilteredAndSearchedNotes(selectedCategory: string, searchWord: string){
-    return this.httpClient.get<Note[]>(this.baseUrl+'/notes', this.httpOptions).pipe(
-      map((notes) => notes.filter((note)=>
-      (note.title.toLowerCase().includes(searchWord.toLowerCase()) ||
-      note.description.toLowerCase().includes(searchWord.toLowerCase())) && note.categoryValue === selectedCategory)));
-  }
-
   deleteNote(id: string) {
     return this.httpClient.delete(this.baseUrl+'/notes/'+id);
   }

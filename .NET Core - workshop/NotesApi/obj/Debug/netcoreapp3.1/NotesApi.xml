@@ -58,7 +58,7 @@
         </member>
         <member name="M:NotesApi.Controllers.NotesController.UpdateNote(System.Guid,NotesApi.Models.Notes)">
             <summary>
-                Return the list of notes with a note updated
+                 Return the list of notes with a note updated
             </summary>
             <param name="id"></param>
             <param name="noteToUpdate"></param>
