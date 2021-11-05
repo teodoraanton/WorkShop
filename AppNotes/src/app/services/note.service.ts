@@ -30,7 +30,7 @@ export class NoteService {
   }
 
   editNote(note: Note){
-    return this.httpClient.put(this.baseUrl+"/notes/?id"+note.id, note).subscribe(response => {
+    return this.httpClient.put(this.baseUrl+"/notes?id="+note.id, note).subscribe(response => {
       this.router.navigate(['notes']);
     }, (err:HttpErrorResponse) => console.log(err));
   }
